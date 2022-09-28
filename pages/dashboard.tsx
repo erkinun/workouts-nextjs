@@ -1,17 +1,47 @@
 import LoggedIn from "../components/LoggedIn";
+import { ref, onValue } from "firebase/database";
+import { database } from "../utils/firebase";
+import { useAuth } from "../utils/authContext";
+import { useEffect, useState } from "react";
+import WorkoutBox from "../components/WorkoutBox";
 
 export default function Dashboard() {
+  const { authUser, loading } = useAuth();
+  const [workouts, setWorkouts] = useState([]);
+
+  useEffect(() => {
+    console.log({ authUser });
+    if (authUser) {
+      const workoutsRef = ref(database, `users/${authUser.uid}/workouts`);
+      onValue(workoutsRef, (snapshot) => {
+        const workouts: Array<any> = [];
+        snapshot.forEach((child) => {
+          console.log({ workout: child.val() });
+          workouts.push({
+            backendId: child.key,
+            ...child.val(),
+          });
+        });
+        setWorkouts(workouts);
+      });
+    }
+  }, [authUser]);
+
+  // TODO find unique keys in workouts to fix the warning
   return (
     <LoggedIn>
       <>
         <main>
-          <h1 className="title">Workouts will be listed here</h1>
-          {/* <h2>{user ? "Logged in" : "Not logged in"}</h2> */}
+          {loading && <h1 className="title">Workouts will be listed here</h1>}
+          <h2 className="list-header">Workouts so far...</h2>
+          {workouts
+            .sort(
+              (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+            )
+            .map((w) => (
+              <WorkoutBox showCheckbox={false} key={w.date} {...w} />
+            ))}
         </main>
-
-        {
-          // TODO remove this and add your own
-        }
       </>
     </LoggedIn>
   );

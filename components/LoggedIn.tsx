@@ -21,6 +21,9 @@ export default function LoggedIn(props) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         {props.children}
+        {
+          // TODO remove this and add your own
+        }
         <footer>
           <a
             href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"

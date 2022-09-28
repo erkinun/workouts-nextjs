@@ -1,7 +1,8 @@
-import { createContext, useContext, Context, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { auth } from "./firebase";
 
-// TODO use react context to pass down the user
+// TODO move the auth information to session so we can use it on the server
+// TODO setup prettier, eslint and husky
 export function useFirebaseAuth() {
   const [authUser, setAuthUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -35,11 +36,5 @@ export const AuthUserContext = createContext({
   loading: true,
 });
 
-/* export function AuthUserProvider({ children }) {
-  const auth = useFirebaseAuth();
-  return (
-    <AuthUserContext.Provider value={auth}>{children}</AuthUserContext.Provider>
-  );
-} */
 // custom hook to use the authUserContext and access authUser and loading
 export const useAuth = () => useContext(AuthUserContext);

@@ -23,7 +23,7 @@ const config: FirebaseOptions = {
 
 const app = initializeApp(config, "workouts");
 
-// const database = getDatabase(app);
+export const database = getDatabase(app);
 export const auth = getAuth(app);
 
 const googleAuthProvider = new GoogleAuthProvider();
