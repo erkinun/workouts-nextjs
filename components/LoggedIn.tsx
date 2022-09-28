@@ -1,10 +1,11 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { Children, useEffect, useState, cloneElement } from "react";
 
 import { auth } from "../utils/firebase";
 
-function useFirebaseAuth() {
+// TODO use react context to pass down the user
+export function useFirebaseAuth() {
   const [authUser, setAuthUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -42,10 +43,11 @@ export default function LoggedIn(props) {
   }, [authUser, loading]);
 
   if (authUser) {
+    console.log;
     return (
       <div className="container">
         <Head>
-          <title>Workouts</title>
+          <title>Workouts for {authUser}</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
         {props.children}
@@ -61,14 +63,8 @@ export default function LoggedIn(props) {
       </div>
     );
   } else if (!loading) {
-    console.log({ typeof: typeof window });
-    if (typeof window === "object") {
-      // client side
-      // Router.push("/");
-      return <div>Not Logged in</div>;
-    } else {
-      return <div>Not Logged in</div>;
-    }
+    router.push("/");
+    return <div>Not Logged in</div>;
   } else {
     // TODO return a component rendering a loading spinner
     return null;
