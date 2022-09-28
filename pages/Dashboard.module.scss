@@ -1,0 +1,15 @@
+@import "../styles/base/settings";
+
+.main {
+  max-width: 50rem;
+}
+
+.header {
+  background: $off-white;
+  border: 1px solid darken($off-white, 7%);
+  color: $grey;
+  display: flex;
+  justify-content: space-between;
+  padding: $s-size $m-size;
+  width: 100%;
+}

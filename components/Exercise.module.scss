@@ -1,0 +1,49 @@
+@import "../styles/base/settings";
+
+.exercise-list {
+  .header {
+    color: red;
+
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: $s-size 0;
+  }
+
+  width: 100%;
+}
+
+.exercise {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: $desktop-breakpoint) {
+    align-items: center;
+    flex-direction: row;
+    padding: 0px 10px 10px 10px;
+  }
+
+  .details {
+    display: flex;
+    justify-content: flex-start;
+
+    div {
+      margin-right: 10px;
+    }
+  }
+
+  .name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+}
+
+.workout {
+  .workout-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+  }
+}

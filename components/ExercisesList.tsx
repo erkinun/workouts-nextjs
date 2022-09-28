@@ -9,7 +9,11 @@ const ExerciseList = ({
     <div className="list-item">
       <div className="exercise-list">
         {exercises.map((e) => (
-          <ExerciseBox showCheckBox={showCheckBox} key={e.name} {...e} />
+          <ExerciseBox
+            showCheckBox={showCheckBox}
+            key={JSON.stringify(e)}
+            {...e}
+          />
         ))}
       </div>
       <br />

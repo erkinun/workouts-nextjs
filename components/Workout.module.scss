@@ -1,0 +1,20 @@
+@import "../styles/base/settings";
+
+.workout {
+  border: 1px solid darken($off-white, 7%);
+  border-top: none;
+
+  width: 100%;
+
+  .header {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+
+    @media (min-width: $desktop-breakpoint) {
+      align-items: center;
+      flex-direction: row;
+      padding: $s-size;
+    }
+  }
+}

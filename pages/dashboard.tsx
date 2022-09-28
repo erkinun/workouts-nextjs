@@ -5,6 +5,8 @@ import { useAuth } from "../utils/authContext";
 import { useEffect, useState } from "react";
 import WorkoutBox from "../components/WorkoutBox";
 
+import styles from "./Dashboard.module.scss";
+
 export default function Dashboard() {
   const { authUser, loading } = useAuth();
   const [workouts, setWorkouts] = useState([]);
@@ -31,9 +33,9 @@ export default function Dashboard() {
   return (
     <LoggedIn>
       <>
-        <main>
+        <main className={styles.main}>
           {loading && <h1 className="title">Workouts will be listed here</h1>}
-          <h2 className="list-header">Workouts so far...</h2>
+          <h2 className={styles.header}>Workouts so far...</h2>
           {workouts
             .sort(
               (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()

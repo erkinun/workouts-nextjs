@@ -1,4 +1,5 @@
 import { Exercise as ExerciseType } from "../utils/types";
+import styles from "./Exercise.module.scss";
 
 const ExerciseBox = ({
   name,
@@ -8,14 +9,14 @@ const ExerciseBox = ({
   showCheckBox = false,
 }: Exercise.Props) => {
   return (
-    <div className="exercise">
+    <div className={styles.exercise}>
       {showCheckBox && (
         <div>
           <input type="checkbox" />
         </div>
       )}
-      <div className="name">{name}</div>
-      <div className="details">
+      <div className={styles.name}>{name}</div>
+      <div className={styles.details}>
         {weight && <div>{weight}</div>}
         {typeOfTraining && <div>{typeOfTraining}</div>}
         {effort && <div>{effort}</div>}

@@ -2,6 +2,8 @@ import ExercisesList from "./ExercisesList";
 import dayjs from "dayjs";
 import { Workout } from "../utils/types";
 
+import styles from "./Workout.module.scss";
+
 const WorkoutBox = ({
   note,
   date,
@@ -9,8 +11,8 @@ const WorkoutBox = ({
   showCheckbox = false,
 }: WorkoutEntry.Props) => {
   return (
-    <div className="workout">
-      <div className="workout-header">
+    <div className={styles.workout}>
+      <div className={styles.header}>
         <div className="note">{note}</div>
         <div className="date">{dayjs(date).format("DD/MM/YYYY")}</div>
       </div>
