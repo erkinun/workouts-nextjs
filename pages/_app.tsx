@@ -1,7 +1,12 @@
 import type { AppProps } from "next/app";
 import "../styles.css";
+import { AuthUserContext, useFirebaseAuth } from "../utils/authContext";
 
-// This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  const auth = useFirebaseAuth();
+  return (
+    <AuthUserContext.Provider value={auth}>
+      <Component {...pageProps} />;
+    </AuthUserContext.Provider>
+  );
 }

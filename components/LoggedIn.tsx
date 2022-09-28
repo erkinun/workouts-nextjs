@@ -1,37 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Children, useEffect, useState, cloneElement } from "react";
-
-import { auth } from "../utils/firebase";
-
-// TODO use react context to pass down the user
-export function useFirebaseAuth() {
-  const [authUser, setAuthUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  const authStateChanged = async (authState) => {
-    if (!authState) {
-      setAuthUser(null);
-      setLoading(false);
-      return;
-    }
-
-    setLoading(true);
-    setAuthUser(authState);
-    setLoading(false);
-  };
-
-  // listen for Firebase state change
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(authStateChanged);
-    return () => unsubscribe();
-  }, []);
-
-  return {
-    authUser,
-    loading,
-  };
-}
+import { useEffect } from "react";
+import { useFirebaseAuth } from "../utils/authContext";
 
 export default function LoggedIn(props) {
   const { authUser, loading } = useFirebaseAuth();
@@ -47,7 +17,7 @@ export default function LoggedIn(props) {
     return (
       <div className="container">
         <Head>
-          <title>Workouts for {authUser}</title>
+          <title>Workouts for {authUser.displayName}</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
         {props.children}

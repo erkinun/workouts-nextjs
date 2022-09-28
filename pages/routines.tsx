@@ -1,7 +1,8 @@
-import LoggedIn, { useFirebaseAuth } from "../components/LoggedIn";
+import LoggedIn from "../components/LoggedIn";
+import { useAuth } from "../utils/authContext";
 
 export default function Routines() {
-  const { authUser, loading } = useFirebaseAuth();
+  const { authUser, loading } = useAuth();
 
   if (!loading && authUser) {
     return (
