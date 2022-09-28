@@ -1,6 +1,13 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-import { GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  setPersistence,
+  signInWithRedirect,
+  getRedirectResult,
+  GoogleAuthProvider,
+  browserSessionPersistence,
+} from "firebase/auth";
 import { FirebaseOptions } from "firebase/app";
 
 const config: FirebaseOptions = {
@@ -12,21 +19,31 @@ const config: FirebaseOptions = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
 };
 
-/* const config = {
-  apiKey: "AIzaSyAsioVmJQGli4eiQbyN155uj6rcbuSpJu0",
-  authDomain: "workouts-logging.firebaseapp.com",
-  databaseURL: "https://workouts-logging.firebaseio.com",
-  projectId: "workouts-logging",
-  storageBucket: "workouts-logging.appspot.com",
-  messagingSenderId: "178785944491",
-}; */
+// TODO if you need SSR auth check this out: https://colinhacks.com/essays/nextjs-firebase-authentication
 
-console.log({ config });
-console.log("initializing firebase");
 const app = initializeApp(config, "workouts");
 
 // const database = getDatabase(app);
+export const auth = getAuth(app);
 
 const googleAuthProvider = new GoogleAuthProvider();
 
 export { app, googleAuthProvider };
+
+export const authFn = async () => {
+  setPersistence(auth, browserSessionPersistence);
+  await signInWithRedirect(auth, googleAuthProvider);
+};
+
+export const isSignedIn = async () => {
+  const result = await getRedirectResult(auth);
+  if (result) {
+    // This is the signed-in user
+    const user = result.user;
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+
+    return true;
+  }
+  return false;
+};

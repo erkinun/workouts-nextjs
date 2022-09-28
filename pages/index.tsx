@@ -1,35 +1,26 @@
 import Head from "next/head";
+import Router from "next/router";
+import { useEffect, useState } from "react";
 import LoadingPage from "../components/LoadingPage";
-
-import { googleAuthProvider, app } from "../utils/firebase";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-const auth = getAuth(app);
-signInWithPopup(auth, googleAuthProvider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    // ...
-
-    console.log("are we here?");
-  })
-  .catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-    console.log("error occurred", error);
-  });
-
-console.log("foo bar implemented");
+import { authFn, isSignedIn } from "../utils/firebase";
 
 export default function Home() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  useEffect(() => {
+    isSignedIn().then((res) => {
+      if (res) {
+        setLoggedIn(true);
+      } else {
+        authFn();
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    if (loggedIn) {
+      Router.push("/dashboard");
+    }
+  }, [loggedIn]);
   return (
     <div className="container">
       <Head>
