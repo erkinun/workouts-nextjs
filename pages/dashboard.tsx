@@ -35,7 +35,9 @@ export default function Dashboard() {
       <>
         <main className={styles.main}>
           {loading && <h1 className="title">Workouts will be listed here</h1>}
-          <h2 className={styles.header}>Workouts so far...</h2>
+          <h2 className={styles.header}>
+            {workouts.length} Workouts so far ...
+          </h2>
           {workouts
             .sort(
               (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
