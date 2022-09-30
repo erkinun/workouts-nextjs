@@ -13,7 +13,6 @@ export default function LoggedIn(props) {
   }, [authUser, loading]);
 
   if (authUser) {
-    console.log;
     return (
       <div className="container">
         <Head>
@@ -24,15 +23,6 @@ export default function LoggedIn(props) {
         {
           // TODO remove this and add your own
         }
-        <footer>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Powered by <img src="/vercel.svg" alt="Vercel" className="logo" />
-          </a>
-        </footer>
       </div>
     );
   } else if (!loading) {

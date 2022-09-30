@@ -1,0 +1,45 @@
+@import "../styles/base/settings";
+
+.header {
+  background: $dark-blue;
+
+  .title {
+    color: white;
+    text-decoration: none;
+    h1 {
+      margin: 0;
+    }
+  }
+
+  .content {
+    margin: 0 auto;
+    max-width: 80rem;
+    padding: $s-size 1.6rem;
+
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    .navigation {
+      align-items: center;
+      display: flex;
+
+      a {
+        margin-right: 10px;
+      }
+
+      .title {
+        color: white;
+        text-decoration: none;
+        h1 {
+          margin: 0;
+        }
+      }
+
+      .section {
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+@import "../styles/base/settings";
+
+.button {
+  color: $white;
+  background-color: $light-blue;
+  border: none;
+  border-radius: 6px;
+  display: inline-block;
+  font-size: $font-size-large;
+  font-weight: 300;
+  line-height: 1;
+  margin: 10px 10px 10px 0;
+  padding: $s-size;
+  text-decoration: none;
+}
+
+.link {
+  @extend .button;
+  cursor: pointer;
+  background: none !important;
+}
