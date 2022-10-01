@@ -12,13 +12,13 @@ export default function Dashboard() {
   const [workouts, setWorkouts] = useState([]);
 
   useEffect(() => {
-    console.log({ authUser });
     if (authUser) {
       const workoutsRef = ref(database, `users/${authUser.uid}/workouts`);
       onValue(workoutsRef, (snapshot) => {
         const workouts: Array<any> = [];
         snapshot.forEach((child) => {
-          console.log({ workout: child.val() });
+          // uncomment if you need to see the workout data
+          // console.log({ workout: child.val() });
           workouts.push({
             backendId: child.key,
             ...child.val(),
@@ -30,23 +30,26 @@ export default function Dashboard() {
   }, [authUser]);
 
   // TODO find unique keys in workouts to fix the warning
+  // TODO add a loading spinner
+  // TODO add a link to workout details page
   return (
     <LoggedIn>
-      <>
-        <main className={styles.main}>
-          {loading && <h1 className="title">Workouts will be listed here</h1>}
-          <h2 className={styles.header}>
-            {workouts.length} Workouts so far ...
-          </h2>
-          {workouts
-            .sort(
-              (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-            )
-            .map((w) => (
-              <WorkoutBox showCheckbox={false} key={w.date} {...w} />
-            ))}
-        </main>
-      </>
+      <main className={styles.main}>
+        <h2 className={styles.header}>{workouts.length} Workouts so far ...</h2>
+        {loading && <h1 className="title">Workouts will be listed here</h1>}
+        {!loading && workouts.length > 0 && (
+          <>
+            {workouts
+              .sort(
+                (a, b) =>
+                  new Date(b.date).getTime() - new Date(a.date).getTime()
+              )
+              .map((w) => (
+                <WorkoutBox showCheckbox={false} key={w.date} {...w} />
+              ))}
+          </>
+        )}
+      </main>
     </LoggedIn>
   );
 }
