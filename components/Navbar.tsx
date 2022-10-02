@@ -5,6 +5,7 @@ import buttonStyles from "./Button.module.scss";
 // TODO handle the logout action
 // TODO show which page we are on by making the link bolder
 // TODO remove the component button
+// TODO better styling for mobile with possible burger menu
 export default function Navbar({ logout }: any) {
   return (
     <header className={styles.header}>

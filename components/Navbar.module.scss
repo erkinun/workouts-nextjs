@@ -20,6 +20,10 @@
     display: flex;
     justify-content: space-between;
 
+    @media (max-width: $desktop-breakpoint) {
+      flex-direction: column;
+    }
+
     .navigation {
       align-items: center;
       display: flex;

@@ -7,6 +7,9 @@ import WorkoutBox from "../components/WorkoutBox";
 
 import styles from "./Dashboard.module.scss";
 
+// TODO include a Login Page
+// TODO add the workouts and routines to the react context so we don't have to fetch them every time
+
 export default function Dashboard() {
   const { authUser, loading } = useAuth();
   const [workouts, setWorkouts] = useState([]);

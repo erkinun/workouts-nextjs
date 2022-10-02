@@ -1,0 +1,90 @@
+@import "../styles/base/settings";
+
+.form {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  font-family: inherit;
+  font-size: inherit;
+
+  > * {
+    margin-bottom: $m-size;
+  }
+
+  input[type="text"] {
+    padding: 10px;
+    border: 0;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  input[type="date"] {
+    padding: 10px;
+    border: 0;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  textarea {
+    width: 100%;
+    resize: vertical;
+    padding: 15px;
+    border-radius: 15px;
+    border: 0;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
+    height: 100px;
+  }
+
+  button {
+    /* remove default behavior */
+    appearance: none;
+    -webkit-appearance: none;
+
+    /* usual styles */
+    padding: 10px;
+    border: none;
+    background-color: #90caf9;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 5px;
+    width: 100%;
+
+    font-family: inherit;
+    font-size: inherit;
+
+    &:hover,
+    &:active {
+      background-color: #64b5f6;
+    }
+  }
+
+  .error {
+    margin: 0 0 $m-size 0;
+    font-style: italic;
+  }
+
+  .routineSelect {
+    width: auto;
+    padding: 1.2rem;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    @media (min-width: $desktop-breakpoint) {
+      width: 400px;
+    }
+  }
+
+  span {
+    color: $black;
+    opacity: 0.5;
+  }
+}

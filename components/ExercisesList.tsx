@@ -2,7 +2,7 @@ import { Exercise as ExerciseType } from "../utils/types";
 import ExerciseBox from "./Exercise";
 
 const ExerciseList = ({
-  exercises,
+  exercises = [],
   showCheckBox = false,
 }: ExerciseList.Props) => {
   return (
