@@ -34,6 +34,10 @@
     font-size: inherit;
   }
 
+  input[type="checkbox"] {
+    vertical-align: bottom;
+  }
+
   textarea {
     width: 100%;
     resize: vertical;

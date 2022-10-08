@@ -12,8 +12,9 @@ type Inputs = {
   routineId: string;
   exercises: Array<Exercise>;
   note: string;
+  saveAsRoutine: boolean;
 };
-
+// TODO make the border radius match throughout the form
 export default function WorkoutForm({ routines = [], onLogWorkout }) {
   const { register, handleSubmit, watch } = useForm<Inputs>();
 
@@ -80,6 +81,18 @@ export default function WorkoutForm({ routines = [], onLogWorkout }) {
         className="textarea-input"
         {...register("note", { required: true })}
       />
+
+      <section>
+        <label htmlFor="saveAsRoutine">
+          Save as a routine{" "}
+          <input
+            type="checkbox"
+            name="saveAsRoutine"
+            {...register("saveAsRoutine", { required: true })}
+          />
+        </label>
+      </section>
+
       <div>
         <button type="submit" className="button">
           Save Workout

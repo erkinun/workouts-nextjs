@@ -29,23 +29,31 @@ export default function Add() {
     }
   }, [authUser]);
 
-  const submitWorkout = (workout) => {
+  // TODO do we need a type for the workout?
+  const submitWorkout = async (workout) => {
     const uid = authUser.uid;
 
-    const workoutsRef = ref(database, `users/${uid}/workouts`);
-    push(workoutsRef, {
-      date: workout.date,
-      note: workout.note,
-      id: workout.id,
-      exercises: workout.exercises,
-    })
-      .then(() => {
-        console.log("Workout added!");
-        router.push("/dashboard");
-      })
-      .catch((e) => {
-        console.error(e);
+    try {
+      const workoutsRef = ref(database, `users/${uid}/workouts`);
+      await push(workoutsRef, {
+        date: workout.date,
+        note: workout.note,
+        id: workout.id,
+        exercises: workout.exercises,
       });
+
+      if (workout.saveAsRoutine) {
+        console.log("saving as routine");
+        const routinesRef = ref(database, `users/${uid}/routines`);
+        await push(routinesRef, {
+          exercises: workout.exercises,
+          note: workout.note,
+        });
+      }
+      router.push("/dashboard");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   if (!loading && authUser) {

@@ -39,12 +39,13 @@ export default function Routines() {
           {!loading && routines.length > 0 && (
             <>
               {routines
-                .sort(
-                  (a, b) =>
-                    new Date(b.date).getTime() - new Date(a.date).getTime()
-                )
+                .sort((a, b) => {
+                  const aNote = a.note.toLowerCase();
+                  const bNote = b.note.toLowerCase();
+                  return aNote > bNote ? 1 : bNote > aNote ? -1 : 0;
+                })
                 .map((r) => (
-                  <RoutineBox key={r.id} {...r} />
+                  <RoutineBox key={r.backendId} {...r} />
                 ))}
             </>
           )}
