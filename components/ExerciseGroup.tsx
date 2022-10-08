@@ -4,6 +4,7 @@ import styles from "./ExerciseGroup.module.scss";
 export default function ExerciseGroup({
   exercises = [],
   addExercise,
+  deleteExercise,
 }: ExerciseGroup.Props) {
   return (
     <>
@@ -20,7 +21,12 @@ export default function ExerciseGroup({
         <ul className={styles.exerciseList}>
           {exercises.map((e, i) => (
             <li key={i}>
-              <ExerciseRow index={i} {...e} />
+              <ExerciseRow
+                index={i}
+                {...e}
+                deleteExercise={(id: string) => deleteExercise(id)}
+                addExercise={() => addExercise()}
+              />
             </li>
           ))}
         </ul>
@@ -34,13 +40,22 @@ export namespace ExerciseGroup {
   export type Props = {
     exercises: Array<Exercise>;
     addExercise: () => void;
+    deleteExercise: (id: string) => void;
   };
 }
 
-// TODO handle the hidden property
-const ExerciseRow = ({ index, name, weight, effort, typeOfTraining }) => {
+const ExerciseRow = ({
+  index,
+  name,
+  weight,
+  effort,
+  typeOfTraining,
+  deleteExercise,
+  addExercise,
+  id = "",
+}) => {
   return (
-    <div className={styles.row}>
+    <div className={styles.row} key={id}>
       <input
         className={styles.textInput}
         type="text"
@@ -65,22 +80,14 @@ const ExerciseRow = ({ index, name, weight, effort, typeOfTraining }) => {
         type="text"
         placeholder="type"
       />
-      {
-        // TOD replace this with a menu component
-      }
-      {/* <Popup
-        trigger={<div className="helper">More</div>}
-        position="right center"
-      >
-        <div>
-          <ul>
-            <li onClick={this.showWeight}>Add Weight</li>
-            <li onClick={this.showEffort}>Add Effort</li>
-            <li onClick={this.showType}>Add Type</li>
-            <li onClick={this.remove}>Remove Exercise</li>
-          </ul>
-        </div>
-      </Popup> */}
+      <div className={styles.buttonGroup}>
+        <button onClick={() => deleteExercise(id)} className="button">
+          Delete
+        </button>
+        <button onClick={() => addExercise()} className="button">
+          Add Another
+        </button>
+      </div>
     </div>
   );
 };

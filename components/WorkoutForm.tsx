@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Exercise } from "../utils/types";
@@ -57,10 +58,19 @@ export default function WorkoutForm({ routines = [], onLogWorkout }) {
       {/* {watchRoutineId && console.log(routines)} */}
       <ExerciseGroup
         exercises={exercises}
+        deleteExercise={(idToDelete) => {
+          setExercises(exercises.filter(({ id }) => id !== idToDelete));
+        }}
         addExercise={() =>
           setExercises(
             exercises.concat([
-              { name: "", weight: "", effort: "", typeOfTraining: "" },
+              {
+                name: "",
+                weight: "",
+                effort: "",
+                typeOfTraining: "",
+                id: uuidv4(),
+              },
             ])
           )
         }

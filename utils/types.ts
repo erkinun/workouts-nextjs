@@ -3,6 +3,7 @@ export type Exercise = {
   weight: string;
   effort: string;
   typeOfTraining: string;
+  id?: string;
 };
 
 export type Workout = {

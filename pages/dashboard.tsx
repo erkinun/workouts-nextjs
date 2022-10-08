@@ -48,7 +48,7 @@ export default function Dashboard() {
                   new Date(b.date).getTime() - new Date(a.date).getTime()
               )
               .map((w) => (
-                <WorkoutBox showCheckbox={false} key={w.date} {...w} />
+                <WorkoutBox showCheckbox={false} key={w.backendId} {...w} />
               ))}
           </>
         )}

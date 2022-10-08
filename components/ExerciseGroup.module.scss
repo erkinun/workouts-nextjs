@@ -52,6 +52,15 @@
 
   margin-bottom: 1.6rem;
 
+  .buttonGroup {
+    margin-left: $s-size;
+    display: flex;
+    gap: $s-size;
+    height: 50px;
+
+    font-size: 12px;
+  }
+
   .helper {
     align-items: center;
     color: $black;
