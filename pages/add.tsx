@@ -19,7 +19,7 @@ export default function Add() {
         const routines: Array<any> = [];
         snapshot.forEach((child) => {
           routines.push({
-            // TODO do we need backendId?
+            // TODO do we need backendId? - we do for updates
             backendId: child.key,
             ...child.val(),
           });
@@ -31,8 +31,6 @@ export default function Add() {
 
   const submitWorkout = (workout) => {
     const uid = authUser.uid;
-
-    console.log({ authUser });
 
     const workoutsRef = ref(database, `users/${uid}/workouts`);
     push(workoutsRef, {

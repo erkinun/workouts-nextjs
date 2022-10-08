@@ -13,7 +13,6 @@ type Inputs = {
   note: string;
 };
 
-// workout form with date picker, routine picker, and dynamic exercise list, note, and submit button
 export default function WorkoutForm({ routines = [], onLogWorkout }) {
   const { register, handleSubmit, watch } = useForm<Inputs>();
 
