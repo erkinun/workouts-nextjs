@@ -18,7 +18,6 @@ export default function Routines() {
         const routines: Array<any> = [];
         snapshot.forEach((child) => {
           routines.push({
-            // TODO do we need backendId?
             backendId: child.key,
             ...child.val(),
           });

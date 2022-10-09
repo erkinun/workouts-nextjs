@@ -1,36 +1,17 @@
 import LoggedIn from "../components/LoggedIn";
-import { ref, onValue } from "firebase/database";
-import { database } from "../utils/firebase";
 import { useAuth } from "../utils/authContext";
-import { useEffect, useState } from "react";
 import WorkoutBox from "../components/WorkoutBox";
 
 import styles from "./Dashboard.module.scss";
+import Link from "next/link";
+import { useWorkouts } from "../utils/workoutContext";
 
 // TODO include a Login Page
 // TODO add the workouts and routines to the react context so we don't have to fetch them every time
 
 export default function Dashboard() {
   const { authUser, loading } = useAuth();
-  const [workouts, setWorkouts] = useState([]);
-
-  useEffect(() => {
-    if (authUser) {
-      const workoutsRef = ref(database, `users/${authUser.uid}/workouts`);
-      onValue(workoutsRef, (snapshot) => {
-        const workouts: Array<any> = [];
-        snapshot.forEach((child) => {
-          // uncomment if you need to see the workout data
-          // console.log({ workout: child.val() });
-          workouts.push({
-            backendId: child.key,
-            ...child.val(),
-          });
-        });
-        setWorkouts(workouts);
-      });
-    }
-  }, [authUser]);
+  const { workouts, dispatch } = useWorkouts();
 
   // TODO find unique keys in workouts to fix the warning
   // TODO add a loading spinner
@@ -48,7 +29,11 @@ export default function Dashboard() {
                   new Date(b.date).getTime() - new Date(a.date).getTime()
               )
               .map((w) => (
-                <WorkoutBox showCheckbox={false} key={w.backendId} {...w} />
+                <Link href={`/workouts/${w.backendId}`} key={w.backendId}>
+                  <a>
+                    <WorkoutBox showCheckbox={false} {...w} />
+                  </a>
+                </Link>
               ))}
           </>
         )}
