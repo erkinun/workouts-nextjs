@@ -6,7 +6,10 @@ import { WorkoutProvider } from "../utils/workoutContext";
 
 // TODO consolidate all todos together
 // TODO add add/routine page
+// TODO add edit routine and workout page
 // TODO use backend id for keys in lists
+// TODO do the mobile styling
+// TODO handle root styling with CSS modules or something
 export default function MyApp({ Component, pageProps }: AppProps) {
   const auth = useFirebaseAuth();
   return (

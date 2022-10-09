@@ -13,7 +13,7 @@ type Payload = { payload: Workout };
 
 type ActionType =
   | { type: "add" }
-  | { type: "remove" }
+  | { type: "remove"; id: string }
   | { type: "update" }
   | { type: "set"; workouts: Workout[] };
 
@@ -22,6 +22,7 @@ type Dispatch = (action: Action) => void;
 type State = Array<Workout>;
 
 // TODO add routines to this state too
+// TODO does it have any meaning to have this reducer without updating the firebase db
 function workoutsReducer(state: State, action: Action) {
   switch (action.type) {
     case "set":
@@ -31,7 +32,7 @@ function workoutsReducer(state: State, action: Action) {
       return [...state, action.payload];
 
     case "remove":
-      return state.filter((workout) => workout.id !== action.payload.id);
+      return state.filter((workout) => workout.backendId !== action.id);
 
     case "update":
       return state.map((workout) => {
@@ -54,8 +55,6 @@ export const WorkoutProvider = ({ children, authUser }) => {
   const [initialWorkouts, setInitialWorkouts] = useState([]);
   const [workouts, dispatch] = useReducer(workoutsReducer, initialWorkouts);
   const value = { workouts, dispatch };
-
-  console.log("workout provider with: ", workouts, initialWorkouts);
 
   useEffect(() => {
     loadWorkouts(authUser, dispatch);
@@ -81,8 +80,6 @@ export function loadWorkouts(authUser, dispatch) {
   if (authUser) {
     const workoutsRef = ref(database, `users/${authUser.uid}/workouts`);
     onValue(workoutsRef, (snapshot) => {
-      // TODO test if this fn gets called after new workout is added in add.tsx
-
       const workouts: Array<any> = [];
       snapshot.forEach((child) => {
         workouts.push({
@@ -91,7 +88,6 @@ export function loadWorkouts(authUser, dispatch) {
         });
       });
 
-      console.log("CALLING FROM ON VALUE", workouts);
       dispatch({ type: "set", workouts, payload: null });
     });
   }

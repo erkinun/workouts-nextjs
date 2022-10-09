@@ -10,7 +10,7 @@ import { useWorkouts } from "../utils/workoutContext";
 // TODO add the workouts and routines to the react context so we don't have to fetch them every time
 
 export default function Dashboard() {
-  const { authUser, loading } = useAuth();
+  const { loading } = useAuth();
   const { workouts, dispatch } = useWorkouts();
 
   // TODO find unique keys in workouts to fix the warning

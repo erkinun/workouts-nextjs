@@ -12,10 +12,15 @@
   margin: 10px 10px 10px 0;
   padding: $s-size;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .link {
   @extend .button;
-  cursor: pointer;
   background: none !important;
+}
+
+.deleteButton {
+  @extend .button;
+  background-color: $red;
 }

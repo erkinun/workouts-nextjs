@@ -1,10 +1,22 @@
-@import "../styles/base/settings";
+@import "../../styles/base/settings";
+
+.contentContainer {
+  margin: 0 auto;
+  max-width: 80rem;
+  padding: 0 $m-size;
+
+  width: 800px;
+
+  @media (max-width: $desktop-breakpoint) {
+    width: 100%;
+  }
+}
 
 .workout {
   border: 1px solid darken($off-white, 7%);
   border-top: none;
 
-  .header {
+  .workout-header {
     display: flex;
     flex-direction: column-reverse;
     justify-content: space-between;

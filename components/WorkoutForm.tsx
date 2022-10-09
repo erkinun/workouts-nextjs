@@ -35,6 +35,13 @@ export default function WorkoutForm({ routines = [], onLogWorkout }) {
     );
   }, [watchRoutineId]);
 
+  const fooSubmit = (e) => {
+    console.log("SUBMITTING SDHIT");
+
+    // handleSubmit(onSubmit);
+    // TODO broken add workout with routines
+  };
+
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <input
