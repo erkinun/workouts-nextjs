@@ -23,6 +23,7 @@ type State = Array<Workout>;
 
 // TODO add routines to this state too
 // TODO does it have any meaning to have this reducer without updating the firebase db
+// TODO maybe remove it and make it just a state?
 function workoutsReducer(state: State, action: Action) {
   switch (action.type) {
     case "set":

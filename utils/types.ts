@@ -12,6 +12,7 @@ export type Workout = {
   date: string; // for now TODO change it to some date type in TS
   exercises: Array<Exercise>;
   note: string;
+  saveAsRoutine?: boolean;
 };
 
 export type Routine = {

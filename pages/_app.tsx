@@ -10,6 +10,8 @@ import { WorkoutProvider } from "../utils/workoutContext";
 // TODO use backend id for keys in lists
 // TODO do the mobile styling
 // TODO handle root styling with CSS modules or something
+// TODO create an src folder and move all the files into it
+// TODO eslint + prettier + husky + lint-staged
 export default function MyApp({ Component, pageProps }: AppProps) {
   const auth = useFirebaseAuth();
   return (

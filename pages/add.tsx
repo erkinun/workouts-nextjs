@@ -31,7 +31,6 @@ export default function Add() {
 
   // TODO do we need a type for the workout?
   const submitWorkout = async (workout) => {
-    console.log("submitting workout: ", workout);
     const uid = authUser.uid;
 
     try {

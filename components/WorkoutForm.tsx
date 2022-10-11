@@ -15,19 +15,23 @@ type Inputs = {
   saveAsRoutine: boolean;
 };
 // TODO make the border radius match throughout the form
-export default function WorkoutForm({ routines = [], onLogWorkout }) {
+export default function WorkoutForm({
+  routines = [],
+  onLogWorkout,
+  workout = null,
+}) {
   const { register, handleSubmit, watch } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log("SUBMITTING");
     const workout = { ...data, id: self.crypto.randomUUID(), exercises };
-    console.log(workout);
     onLogWorkout(workout);
   };
 
   const watchRoutineId = watch("routineId");
 
-  const [exercises, setExercises] = useState<Array<Exercise>>([]);
+  const [exercises, setExercises] = useState<Array<Exercise>>(
+    workout?.exercises ?? []
+  );
 
   useEffect(() => {
     setExercises(
@@ -35,18 +39,20 @@ export default function WorkoutForm({ routines = [], onLogWorkout }) {
     );
   }, [watchRoutineId]);
 
-  const fooSubmit = (e) => {
-    console.log("SUBMITTING SDHIT");
+  useEffect(() => {
+    setExercises(workout?.exercises ?? []);
+  }, [workout]);
 
-    // handleSubmit(onSubmit);
-    // TODO broken add workout with routines
-  };
+  console.log(workout?.date);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      {
+        // TODO use the current time of the day with date
+      }
       <input
         type="date"
-        value={dayjs().format("YYYY-MM-DD")}
+        value={dayjs(workout?.date ?? Date.now()).format("YYYY-MM-DD")}
         {...register("date")}
       />
       <label htmlFor="routines">Pick a routine</label>
@@ -86,6 +92,7 @@ export default function WorkoutForm({ routines = [], onLogWorkout }) {
       <textarea
         placeholder="notes about workout"
         className="textarea-input"
+        defaultValue={workout?.note}
         {...register("note", { required: true })}
       />
 
