@@ -95,7 +95,7 @@ export default function WorkoutForm({ routines = [], onLogWorkout }) {
           <input
             type="checkbox"
             name="saveAsRoutine"
-            {...register("saveAsRoutine", { required: true })}
+            {...register("saveAsRoutine")}
           />
         </label>
       </section>
