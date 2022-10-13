@@ -8,6 +8,7 @@ import ExerciseGroup from "./ExerciseGroup";
 import styles from "./WorkoutForm.module.scss";
 
 type Inputs = {
+  backendId: string;
   date: string;
   routineId: string;
   exercises: Array<Exercise>;
@@ -20,15 +21,18 @@ export default function WorkoutForm({
   onLogWorkout,
   workout = null,
 }) {
-  const { register, handleSubmit, watch } = useForm<Inputs>();
+  const { register, handleSubmit, watch, control } = useForm<Inputs>({
+    defaultValues: workout ?? {},
+  });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const workout = { ...data, id: self.crypto.randomUUID(), exercises };
+    const workout = { ...data, id: self.crypto.randomUUID() };
     onLogWorkout(workout);
   };
 
   const watchRoutineId = watch("routineId");
 
+  // TODO come back here, this means selecting routines is broken atm
   const [exercises, setExercises] = useState<Array<Exercise>>(
     workout?.exercises ?? []
   );
@@ -43,13 +47,12 @@ export default function WorkoutForm({
     setExercises(workout?.exercises ?? []);
   }, [workout]);
 
-  console.log(workout?.date);
-
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       {
         // TODO use the current time of the day with date
       }
+      <input type="hidden" name="backendId" {...register("backendId")} />
       <input
         type="date"
         value={dayjs(workout?.date ?? Date.now()).format("YYYY-MM-DD")}
@@ -70,25 +73,7 @@ export default function WorkoutForm({
       </select>
 
       {/* {watchRoutineId && console.log(routines)} */}
-      <ExerciseGroup
-        exercises={exercises}
-        deleteExercise={(idToDelete) => {
-          setExercises(exercises.filter(({ id }) => id !== idToDelete));
-        }}
-        addExercise={() =>
-          setExercises(
-            exercises.concat([
-              {
-                name: "",
-                weight: "",
-                effort: "",
-                typeOfTraining: "",
-                id: uuidv4(),
-              },
-            ])
-          )
-        }
-      />
+      <ExerciseGroup register={register} control={control} />
       <textarea
         placeholder="notes about workout"
         className="textarea-input"

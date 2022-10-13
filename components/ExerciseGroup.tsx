@@ -1,16 +1,31 @@
-import { Exercise } from "../utils/types";
+import { Control, useFieldArray, UseFormRegister } from "react-hook-form";
 import styles from "./ExerciseGroup.module.scss";
 
 export default function ExerciseGroup({
-  exercises = [],
-  addExercise,
-  deleteExercise,
+  control,
+  register,
 }: ExerciseGroup.Props) {
+  const { fields, append, remove, insert } = useFieldArray({
+    control,
+    name: "exercises",
+  });
+
+  console.log({ fields });
+
+  const addNewExercise = () => {
+    append({
+      name: "",
+      weight: "",
+      effort: "",
+      typeOfTraining: "",
+    });
+  };
+
   return (
     <>
       <label htmlFor="addExercise">Manually</label>
       <button
-        onClick={addExercise}
+        onClick={addNewExercise}
         name="addExercise"
         type="button"
         className="button"
@@ -19,13 +34,20 @@ export default function ExerciseGroup({
       </button>
       <div className="list-item">
         <ul className={styles.exerciseList}>
-          {exercises.map((e, i) => (
-            <li key={i}>
+          {fields.map((item, i) => (
+            <li key={item.id}>
               <ExerciseRow
                 index={i}
-                {...e}
-                deleteExercise={(id: string) => deleteExercise(id)}
-                addExercise={() => addExercise()}
+                register={register}
+                deleteExercise={() => remove(i)}
+                addExercise={() =>
+                  insert(i + 1, {
+                    name: "",
+                    weight: "",
+                    effort: "",
+                    typeOfTraining: "",
+                  })
+                }
               />
             </li>
           ))}
@@ -38,18 +60,14 @@ export default function ExerciseGroup({
 
 export namespace ExerciseGroup {
   export type Props = {
-    exercises: Array<Exercise>;
-    addExercise: () => void;
-    deleteExercise: (id: string) => void;
+    register: UseFormRegister<any>;
+    control: Control<any, any>;
   };
 }
 
 const ExerciseRow = ({
   index,
-  name,
-  weight,
-  effort,
-  typeOfTraining,
+  register,
   deleteExercise,
   addExercise,
   id = "",
@@ -60,31 +78,31 @@ const ExerciseRow = ({
         className={styles.textInput}
         type="text"
         placeholder={"exercise " + (index + 1)}
-        defaultValue={name}
+        {...register(`exercises.${index}.name` as const)}
       />
       <input
-        defaultValue={weight}
         className={`${styles.textInput} ${styles.smallInput}`}
         type="text"
         placeholder="weight"
+        {...register(`exercises.${index}.weight` as const)}
       />
       <input
-        defaultValue={effort}
         className={`${styles.textInput} ${styles.smallInput}`}
         type="text"
         placeholder="effort"
+        {...register(`exercises.${index}.effort` as const)}
       />
       <input
-        defaultValue={typeOfTraining}
         className={`${styles.textInput} ${styles.smallInput}`}
         type="text"
         placeholder="type"
+        {...register(`exercises.${index}.typeOfTraining` as const)}
       />
       <div className={styles.buttonGroup}>
         <button onClick={() => deleteExercise(id)} className="button">
           Delete
         </button>
-        <button onClick={() => addExercise()} className="button">
+        <button onClick={addExercise} className="button">
           Add Another
         </button>
       </div>

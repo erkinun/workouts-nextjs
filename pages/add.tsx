@@ -6,7 +6,7 @@ import LoggedIn from "../components/LoggedIn";
 import WorkoutForm from "../components/WorkoutForm";
 import { useAuth } from "../utils/authContext";
 import styles from "./Dashboard.module.scss";
-
+// TODO move this under workouts?
 export default function Add() {
   const { authUser, loading } = useAuth();
   const [routines, setRoutines] = useState([]);

@@ -7,6 +7,7 @@ import { useWorkouts } from "../../../utils/workoutContext";
 
 import styles from "../../Dashboard.module.scss";
 
+// TODO doesn't populate the stupid exercises for some reason when reloaded
 export default function EditWorkout() {
   const { authUser, loading } = useAuth();
   const { workouts } = useWorkouts();
