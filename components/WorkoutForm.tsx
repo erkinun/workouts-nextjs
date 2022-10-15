@@ -21,31 +21,28 @@ export default function WorkoutForm({
   onLogWorkout,
   workout = null,
 }) {
-  const { register, handleSubmit, watch, control } = useForm<Inputs>({
+  const { register, handleSubmit, watch, control, reset } = useForm<Inputs>({
     defaultValues: workout ?? {},
   });
+
+  const watchRoutineId = watch("routineId");
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const workout = { ...data, id: self.crypto.randomUUID() };
     onLogWorkout(workout);
   };
 
-  const watchRoutineId = watch("routineId");
-
-  // TODO come back here, this means selecting routines is broken atm
-  const [exercises, setExercises] = useState<Array<Exercise>>(
-    workout?.exercises ?? []
-  );
-
   useEffect(() => {
-    setExercises(
-      routines.find((r) => r.backendId === watchRoutineId)?.exercises ?? []
-    );
+    if (watchRoutineId) {
+      const selectedRoutine = routines.find(
+        (r) => r.backendId === watchRoutineId
+      );
+      console.log({ selectedRoutine, watchRoutineId });
+      reset({
+        exercises: selectedRoutine?.exercises ?? [],
+      });
+    }
   }, [watchRoutineId]);
-
-  useEffect(() => {
-    setExercises(workout?.exercises ?? []);
-  }, [workout]);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -55,7 +52,7 @@ export default function WorkoutForm({
       <input type="hidden" name="backendId" {...register("backendId")} />
       <input
         type="date"
-        value={dayjs(workout?.date ?? Date.now()).format("YYYY-MM-DD")}
+        defaultValue={dayjs(workout?.date ?? Date.now()).format("YYYY-MM-DD")}
         {...register("date")}
       />
       <label htmlFor="routines">Pick a routine</label>

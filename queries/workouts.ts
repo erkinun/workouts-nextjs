@@ -2,6 +2,8 @@ import { push, ref, remove, update } from "firebase/database";
 import { database } from "../utils/firebase";
 import { Workout } from "../utils/types";
 
+// TODO maybe use react query?
+
 export const deleteWorkout = async (uid: string, workoutId: string) => {
   try {
     const workoutRef = ref(database, `users/${uid}/workouts/${workoutId}`);

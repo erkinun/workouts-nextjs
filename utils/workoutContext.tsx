@@ -77,7 +77,6 @@ export function useWorkouts() {
 }
 
 export function loadWorkouts(authUser, dispatch) {
-  console.log("loading workouts: ", authUser);
   if (authUser) {
     const workoutsRef = ref(database, `users/${authUser.uid}/workouts`);
     onValue(workoutsRef, (snapshot) => {

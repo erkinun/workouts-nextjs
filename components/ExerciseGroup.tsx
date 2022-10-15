@@ -10,8 +10,6 @@ export default function ExerciseGroup({
     name: "exercises",
   });
 
-  console.log({ fields });
-
   const addNewExercise = () => {
     append({
       name: "",

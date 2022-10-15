@@ -1,35 +1,20 @@
 import { useEffect, useState } from "react";
-import { ref, onValue, set, push } from "firebase/database";
+import { ref, onValue, push } from "firebase/database";
 import { useRouter } from "next/router";
 import { database } from "../utils/firebase";
 import LoggedIn from "../components/LoggedIn";
 import WorkoutForm from "../components/WorkoutForm";
 import { useAuth } from "../utils/authContext";
 import styles from "./Dashboard.module.scss";
-// TODO move this under workouts?
+import useRoutines from "../queries/routines";
+// TODO move this page under workouts?
 export default function Add() {
   const { authUser, loading } = useAuth();
-  const [routines, setRoutines] = useState([]);
+  const routines = useRoutines(authUser?.uid);
   const router = useRouter();
 
-  useEffect(() => {
-    if (authUser) {
-      const routinesRef = ref(database, `users/${authUser.uid}/routines`);
-      onValue(routinesRef, (snapshot) => {
-        const routines: Array<any> = [];
-        snapshot.forEach((child) => {
-          routines.push({
-            // TODO do we need backendId? - we do for updates
-            backendId: child.key,
-            ...child.val(),
-          });
-        });
-        setRoutines(routines);
-      });
-    }
-  }, [authUser]);
-
   // TODO do we need a type for the workout?
+  // TODO move this fn to queries/workouts?
   const submitWorkout = async (workout) => {
     const uid = authUser.uid;
 
