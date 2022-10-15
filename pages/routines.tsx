@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import styles from "./Dashboard.module.scss";
 import RoutineBox from "../components/RoutineBox";
+import Link from "next/link";
 
 export default function Routines() {
   const { authUser, loading } = useAuth();
@@ -44,7 +45,11 @@ export default function Routines() {
                   return aNote > bNote ? 1 : bNote > aNote ? -1 : 0;
                 })
                 .map((r) => (
-                  <RoutineBox key={r.backendId} {...r} />
+                  <Link href={`/routines/${r.backendId}`} key={r.backendId}>
+                    <a>
+                      <RoutineBox key={r.backendId} {...r} />
+                    </a>
+                  </Link>
                 ))}
             </>
           )}
