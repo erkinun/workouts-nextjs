@@ -11,7 +11,7 @@ import { useWorkouts } from "../utils/workoutContext";
 
 export default function Dashboard() {
   const { loading } = useAuth();
-  const { workouts, dispatch } = useWorkouts();
+  const { workouts } = useWorkouts();
 
   // TODO find unique keys in workouts to fix the warning
   // TODO add a loading spinner
