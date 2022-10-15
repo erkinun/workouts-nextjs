@@ -4,6 +4,7 @@ import "../styles.css";
 import { AuthUserContext, useFirebaseAuth } from "../utils/authContext";
 import { WorkoutProvider } from "../utils/workoutContext";
 
+// TODO edit routine, delete routine, use routine in a workout, save workout as routine are left
 // TODO consolidate all todos together
 // TODO add add/routine page
 // TODO add edit routine and workout page
