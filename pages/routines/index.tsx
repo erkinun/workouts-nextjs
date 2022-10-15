@@ -1,11 +1,11 @@
-import LoggedIn from "../components/LoggedIn";
+import LoggedIn from "../../components/LoggedIn";
 import { ref, onValue } from "firebase/database";
-import { database } from "../utils/firebase";
-import { useAuth } from "../utils/authContext";
+import { database } from "../../utils/firebase";
+import { useAuth } from "../../utils/authContext";
 import { useEffect, useState } from "react";
 
-import styles from "./Dashboard.module.scss";
-import RoutineBox from "../components/RoutineBox";
+import styles from "../Dashboard.module.scss";
+import RoutineBox from "../../components/RoutineBox";
 import Link from "next/link";
 
 export default function Routines() {
