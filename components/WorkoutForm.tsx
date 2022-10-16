@@ -1,6 +1,5 @@
 import dayjs from "dayjs";
-import { v4 as uuidv4 } from "uuid";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Exercise } from "../utils/types";
 import ExerciseGroup from "./ExerciseGroup";
@@ -16,10 +15,12 @@ type Inputs = {
   saveAsRoutine: boolean;
 };
 // TODO make the border radius match throughout the form
+// TODO inserting a new exercise submits the fucking form
 export default function WorkoutForm({
   routines = [],
   onLogWorkout,
   workout = null,
+  routineMode = false,
 }) {
   const { register, handleSubmit, watch, control, reset } = useForm<Inputs>({
     defaultValues: workout ?? {},
@@ -37,7 +38,6 @@ export default function WorkoutForm({
       const selectedRoutine = routines.find(
         (r) => r.backendId === watchRoutineId
       );
-      console.log({ selectedRoutine, watchRoutineId });
       reset({
         exercises: selectedRoutine?.exercises ?? [],
       });
@@ -91,7 +91,7 @@ export default function WorkoutForm({
 
       <div>
         <button type="submit" className="button">
-          Save Workout
+          {routineMode ? "Save Routine" : "Save Workout"}
         </button>
       </div>
     </form>

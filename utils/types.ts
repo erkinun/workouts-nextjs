@@ -16,6 +16,7 @@ export type Workout = {
 };
 
 export type Routine = {
+  backendId?: string;
   id?: string;
   exercises: Array<Exercise>;
   note: string;

@@ -17,7 +17,6 @@ export default function EditWorkout() {
   const { id } = router.query;
   const workout = workouts.find((workout) => workout.backendId === id);
 
-  // TODO updating the workout creates a duplicate, check the backendid of the last workouts
   const submitWorkout = async (workout) => {
     await updateWorkout(authUser.uid, workout);
     router.push("/dashboard");
