@@ -2,7 +2,7 @@ import { push, ref, remove, update } from "firebase/database";
 import { database } from "../utils/firebase";
 import { Workout } from "../utils/types";
 
-// TODO maybe use react query?
+// TODO maybe use react query? or maybe just in react context
 
 export const deleteWorkout = async (uid: string, workoutId: string) => {
   try {

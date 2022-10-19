@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { ref, onValue, update } from "firebase/database";
+import { ref, onValue, update, push } from "firebase/database";
 import { database } from "../utils/firebase";
 import { Routine } from "../utils/types";
-// TODO move this into workout context
+// TODO move reading routines into workout context so we don't call it every time
 export default function useRoutines(uid: string) {
   const [routines, setRoutines] = useState([]);
   useEffect(() => {
@@ -33,6 +33,18 @@ export const updateRoutine = async (uid: string, routine: Routine) => {
     await update(workoutsRef, {
       note: routine.note,
       exercises: routine.exercises,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const saveRoutine = async (uid: string, routine: Routine) => {
+  try {
+    const routinesRef = ref(database, `users/${uid}/routines`);
+    await push(routinesRef, {
+      exercises: routine.exercises,
+      note: routine.note,
     });
   } catch (error) {
     console.error(error);

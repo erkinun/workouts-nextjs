@@ -4,6 +4,7 @@ import { Workout } from "../utils/types";
 
 import styles from "./Workout.module.scss";
 
+// TODO make the design more aligned center
 const WorkoutBox = ({
   note,
   date,
