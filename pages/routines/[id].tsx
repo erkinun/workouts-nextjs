@@ -6,7 +6,7 @@ import styles from "../workouts/Workout.module.scss";
 import buttonStyles from "../../components/Button.module.scss";
 import { useAuth } from "../../utils/authContext";
 import { deleteWorkout } from "../../queries/workouts";
-import useRoutines from "../../queries/routines";
+import useRoutines, { deleteRoutine } from "../../queries/routines";
 
 export default function AddRoutine() {
   const router = useRouter();
@@ -17,8 +17,8 @@ export default function AddRoutine() {
   const routine = routines.find((routine) => routine.backendId === id);
 
   const handleDelete = async () => {
-    // TODO implement delete routine
-    // await deleteRoutine(authUser.uid, id.toString()); // id is not going to be an array
+    await deleteRoutine(authUser.uid, id.toString()); // id is not going to be an array
+    // TODO add a toast and then route to routines
     router.push("/routines");
   };
 

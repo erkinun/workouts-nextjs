@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ref, onValue, update, push } from "firebase/database";
+import { ref, onValue, update, push, remove } from "firebase/database";
 import { database } from "../utils/firebase";
 import { Routine } from "../utils/types";
 // TODO move reading routines into workout context so we don't call it every time
@@ -46,6 +46,15 @@ export const saveRoutine = async (uid: string, routine: Routine) => {
       exercises: routine.exercises,
       note: routine.note,
     });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteRoutine = async (uid: string, routineId: string) => {
+  try {
+    const routineRef = ref(database, `users/${uid}/routines/${routineId}`);
+    await remove(routineRef);
   } catch (error) {
     console.error(error);
   }
