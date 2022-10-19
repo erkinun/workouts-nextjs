@@ -7,11 +7,13 @@ import WorkoutForm from "../components/WorkoutForm";
 import { useAuth } from "../utils/authContext";
 import styles from "./Dashboard.module.scss";
 import useRoutines from "../queries/routines";
+
 // TODO move this page under workouts?
-export default function Add() {
+export default function AddWorkout() {
   const { authUser, loading } = useAuth();
   const routines = useRoutines(authUser?.uid);
   const router = useRouter();
+  const routineId = router.query.routineId ?? null;
 
   // TODO do we need a type for the workout?
   // TODO move this fn to queries/workouts?
@@ -46,7 +48,11 @@ export default function Add() {
       <LoggedIn>
         <main className={styles.main}>
           <h2 className={styles.header}>Add Workout</h2>
-          <WorkoutForm onLogWorkout={submitWorkout} routines={routines} />
+          <WorkoutForm
+            onLogWorkout={submitWorkout}
+            routines={routines}
+            selectedRoutine={routineId}
+          />
         </main>
       </LoggedIn>
     );

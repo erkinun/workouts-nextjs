@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import WorkoutBox from "../../components/WorkoutBox";
-
 import styles from "../workouts/Workout.module.scss";
 import buttonStyles from "../../components/Button.module.scss";
 import { useAuth } from "../../utils/authContext";
-import { deleteWorkout } from "../../queries/workouts";
 import useRoutines, { deleteRoutine } from "../../queries/routines";
 
 export default function AddRoutine() {

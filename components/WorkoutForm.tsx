@@ -21,6 +21,7 @@ export default function WorkoutForm({
   onLogWorkout,
   workout = null,
   routineMode = false,
+  selectedRoutine = null,
 }) {
   const { register, handleSubmit, watch, control, reset } = useForm<Inputs>({
     defaultValues: workout ?? {},
@@ -34,15 +35,14 @@ export default function WorkoutForm({
   };
 
   useEffect(() => {
-    if (watchRoutineId) {
-      const selectedRoutine = routines.find(
-        (r) => r.backendId === watchRoutineId
-      );
+    const routineId = selectedRoutine ?? watchRoutineId;
+    if (routineId) {
+      const selectedRoutine = routines.find((r) => r.backendId === routineId);
       reset({
         exercises: selectedRoutine?.exercises ?? [],
       });
     }
-  }, [watchRoutineId]);
+  }, [watchRoutineId, selectedRoutine]);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
