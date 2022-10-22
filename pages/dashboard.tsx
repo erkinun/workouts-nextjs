@@ -5,12 +5,15 @@ import WorkoutBox from "../components/WorkoutBox";
 import styles from "./Dashboard.module.scss";
 import Link from "next/link";
 import { useWorkouts } from "../utils/workoutContext";
+import Loading from "../components/Loading";
 
 export default function Dashboard() {
   const { loading } = useAuth();
   const { workouts } = useWorkouts();
 
-  // TODO add a loading spinner
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <LoggedIn>

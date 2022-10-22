@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useFirebaseAuth } from "../utils/authContext";
+import Loading from "./Loading";
 
 export default function LoggedIn(props) {
   const { authUser, loading } = useFirebaseAuth();
@@ -29,7 +30,6 @@ export default function LoggedIn(props) {
     router.push("/");
     return <div>Not Logged in</div>;
   } else {
-    // TODO return a component rendering a loading spinner
-    return null;
+    return <Loading />;
   }
 }
