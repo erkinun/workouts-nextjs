@@ -5,8 +5,6 @@ import { AuthUserContext, useFirebaseAuth } from "../utils/authContext";
 import { WorkoutProvider } from "../utils/workoutContext";
 
 // TODO consolidate all todos together
-// TODO add add/routine page
-// TODO add edit routine and workout page
 // TODO use backend id for keys in lists
 // TODO handle the NAV in a better way
 // TODO do the mobile styling
