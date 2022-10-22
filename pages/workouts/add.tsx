@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
-import { ref, onValue, push } from "firebase/database";
+import { ref, push } from "firebase/database";
 import { useRouter } from "next/router";
-import { database } from "../utils/firebase";
-import LoggedIn from "../components/LoggedIn";
-import WorkoutForm from "../components/WorkoutForm";
-import { useAuth } from "../utils/authContext";
-import styles from "./Dashboard.module.scss";
-import useRoutines from "../queries/routines";
+import { database } from "../../utils/firebase";
+import LoggedIn from "../../components/LoggedIn";
+import WorkoutForm from "../../components/WorkoutForm";
+import { useAuth } from "../../utils/authContext";
+import styles from "../Dashboard.module.scss";
+import useRoutines from "../../queries/routines";
 
-// TODO move this page under workouts?
 export default function AddWorkout() {
   const { authUser, loading } = useAuth();
   const routines = useRoutines(authUser?.uid);

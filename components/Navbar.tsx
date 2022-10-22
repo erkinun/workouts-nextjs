@@ -16,7 +16,7 @@ export default function Navbar({ logout }: any) {
               <h1 className={styles.title}>Workouts</h1>
             </a>
           </Link>
-          <Link href="/add">
+          <Link href="/workouts/add">
             <a>
               <h3 className={styles.section}>Log Workout</h3>
             </a>

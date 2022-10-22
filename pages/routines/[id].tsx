@@ -26,7 +26,7 @@ export default function AddRoutine() {
         <Link href={`/routines/edit/${id}`}>
           <button className={buttonStyles.button}>Edit</button>
         </Link>
-        <Link href={`/add?routineId=${id}`}>
+        <Link href={`/workouts/add?routineId=${id}`}>
           <button className={buttonStyles.button}>Use in workout</button>
         </Link>
       </div>

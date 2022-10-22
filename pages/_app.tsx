@@ -8,6 +8,7 @@ import { WorkoutProvider } from "../utils/workoutContext";
 // TODO add add/routine page
 // TODO add edit routine and workout page
 // TODO use backend id for keys in lists
+// TODO handle the NAV in a better way
 // TODO do the mobile styling
 // TODO handle root styling with CSS modules or something
 // TODO create an src folder and move all the files into it
