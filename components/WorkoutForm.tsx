@@ -72,22 +72,26 @@ export default function WorkoutForm({
       {/* {watchRoutineId && console.log(routines)} */}
       <ExerciseGroup register={register} control={control} />
       <textarea
-        placeholder="notes about workout"
+        placeholder={
+          routineMode ? "name of the routine" : "notes about workout"
+        }
         className="textarea-input"
         defaultValue={workout?.note}
         {...register("note", { required: true })}
       />
 
-      <section>
-        <label htmlFor="saveAsRoutine">
-          Save as a routine{" "}
-          <input
-            type="checkbox"
-            name="saveAsRoutine"
-            {...register("saveAsRoutine")}
-          />
-        </label>
-      </section>
+      {!routineMode && (
+        <section>
+          <label htmlFor="saveAsRoutine">
+            Save as a routine{" "}
+            <input
+              type="checkbox"
+              name="saveAsRoutine"
+              {...register("saveAsRoutine")}
+            />
+          </label>
+        </section>
+      )}
 
       <div>
         <button type="submit" className="button">
