@@ -37,7 +37,7 @@ export default function Routines() {
           </h2>
           {loading && <h1 className="title">Routines will be listed here</h1>}
           {!loading && routines.length > 0 && (
-            <>
+            <ul>
               {routines
                 .sort((a, b) => {
                   const aNote = a.note.toLowerCase();
@@ -45,13 +45,15 @@ export default function Routines() {
                   return aNote > bNote ? 1 : bNote > aNote ? -1 : 0;
                 })
                 .map((r) => (
-                  <Link href={`/routines/${r.backendId}`} key={r.backendId}>
-                    <a>
-                      <RoutineBox key={r.backendId} {...r} />
-                    </a>
-                  </Link>
+                  <li>
+                    <Link href={`/routines/${r.backendId}`} key={r.backendId}>
+                      <a>
+                        <RoutineBox key={r.backendId} {...r} />
+                      </a>
+                    </Link>
+                  </li>
                 ))}
-            </>
+            </ul>
           )}
         </main>
       </LoggedIn>
