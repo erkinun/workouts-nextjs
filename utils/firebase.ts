@@ -47,3 +47,7 @@ export const isSignedIn = async () => {
   }
   return false;
 };
+
+export const logOut = async () => {
+  auth.signOut();
+};

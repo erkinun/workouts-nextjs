@@ -2,14 +2,23 @@ import * as React from "react";
 import Link from "next/link";
 import styles from "./Navbar.module.scss";
 import buttonStyles from "./Button.module.scss";
-// TODO handle the logout action
+import { useRouter } from "next/router";
+import { logOut } from "../utils/firebase";
+
 // TODO show which page we are on by making the link bolder
 // TODO remove the component button
 // TODO better styling for mobile with possible burger menu
-export default function Navbar({ logout }: any) {
+export default function Navbar() {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await logOut();
+    router.push("/");
+  };
+
   return (
     <header className={styles.header}>
-      <div className={styles.content}>
+      <nav className={styles.content}>
         <div className={styles.navigation}>
           <Link href="/dashboard">
             <a>
@@ -27,10 +36,10 @@ export default function Navbar({ logout }: any) {
             </a>
           </Link>
         </div>
-        <button className={buttonStyles.link} onClick={logout}>
+        <button className={buttonStyles.link} onClick={handleLogout}>
           Logout
         </button>
-      </div>
+      </nav>
     </header>
   );
 }
