@@ -1,26 +1,17 @@
 import Head from "next/head";
 import Router from "next/router";
-import { useEffect, useState } from "react";
 import LoadingPage from "../components/LoadingPage";
-import { authFn, isSignedIn } from "../utils/firebase";
+import { useAuth } from "../utils/authContext";
 
 export default function Home() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  useEffect(() => {
-    isSignedIn().then((res) => {
-      if (res) {
-        setLoggedIn(true);
-      } else {
-        authFn();
-      }
-    });
-  }, []);
+  const { loading, authUser } = useAuth();
 
-  useEffect(() => {
-    if (loggedIn) {
-      Router.push("/dashboard");
-    }
-  }, [loggedIn]);
+  if (!loading && authUser) {
+    Router.push("/dashboard");
+  } else if (!loading && !authUser) {
+    Router.push("/login");
+  }
+
   return (
     <div className="container">
       <Head>
