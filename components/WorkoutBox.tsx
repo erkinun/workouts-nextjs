@@ -14,8 +14,8 @@ const WorkoutBox = ({
   return (
     <div className={styles.workout}>
       <div className={styles.header}>
-        <div className="note">{note}</div>
-        <div className="date">{dayjs(date).format("DD/MM/YYYY")}</div>
+        <div className={styles.note}>{note}</div>
+        <div className={styles.date}>{dayjs(date).format("DD/MM/YYYY")}</div>
       </div>
       <ExercisesList showCheckBox={showCheckbox} exercises={exercises} />
     </div>

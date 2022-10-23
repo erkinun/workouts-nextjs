@@ -4,12 +4,11 @@ import "../styles.css";
 import { AuthUserContext, useFirebaseAuth } from "../utils/authContext";
 import { WorkoutProvider } from "../utils/workoutContext";
 
-// TODO consolidate all todos together
-// TODO include a Login Page
-// TODO add the workouts and routines to the react context so we don't have to fetch them every time
-// TODO use backend id for keys in lists
-// TODO handle the NAV in a better way
 // TODO do the mobile styling
+// TODO consolidate all todos together
+// TODO add the workouts and routines to the react context so we don't have to fetch them every time
+// TODO add a toast to the delete routine and delete workout
+// TODO handle the NAV in a better way
 // TODO handle root styling with CSS modules or something
 // TODO create an src folder and move all the files into it
 // TODO eslint + prettier + husky + lint-staged
