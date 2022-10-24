@@ -4,7 +4,6 @@ import "../styles.css";
 import { AuthUserContext, useFirebaseAuth } from "../utils/authContext";
 import { WorkoutProvider } from "../utils/workoutContext";
 
-// TODO do the mobile styling
 // TODO consolidate all todos together
 // TODO add the workouts and routines to the react context so we don't have to fetch them every time
 // TODO add a toast to the delete routine and delete workout

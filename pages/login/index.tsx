@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import buttonStyles from "../../components/Button.module.scss";
 import { useAuth } from "../../utils/authContext";
 import { authFn } from "../../utils/firebase";
@@ -8,9 +9,11 @@ export default function Login() {
   const router = useRouter();
   const { loading, authUser } = useAuth();
 
-  if (!loading && authUser) {
-    router.push("/dashboard");
-  }
+  useEffect(() => {
+    if (!loading && authUser) {
+      router.push("/dashboard");
+    }
+  }, [loading, authUser]);
 
   const handleLogin = async () => {
     authFn();

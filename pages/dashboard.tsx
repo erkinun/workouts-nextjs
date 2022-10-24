@@ -28,7 +28,7 @@ export default function Dashboard() {
                   new Date(b.date).getTime() - new Date(a.date).getTime()
               )
               .map((w) => (
-                <li>
+                <li key={w.backendId}>
                   <Link href={`/workouts/${w.backendId}`} key={w.backendId}>
                     <a>
                       <WorkoutBox showCheckbox={false} {...w} />

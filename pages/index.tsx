@@ -1,16 +1,20 @@
 import Head from "next/head";
-import Router from "next/router";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import LoadingPage from "../components/LoadingPage";
 import { useAuth } from "../utils/authContext";
 
 export default function Home() {
+  const router = useRouter();
   const { loading, authUser } = useAuth();
 
-  if (!loading && authUser) {
-    Router.push("/dashboard");
-  } else if (!loading && !authUser) {
-    Router.push("/login");
-  }
+  useEffect(() => {
+    if (!loading && authUser) {
+      router.push("/dashboard");
+    } else if (!loading && !authUser) {
+      router.push("/login");
+    }
+  }, [authUser, loading]);
 
   return (
     <div className="container">
