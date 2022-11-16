@@ -6,7 +6,7 @@ import { useWorkouts } from "../../utils/workoutContext";
 import styles from "./Workout.module.scss";
 import buttonStyles from "../../components/Button.module.scss";
 import { useAuth } from "../../utils/authContext";
-import { deleteWorkout } from "../../queries/workouts";
+import { deleteWorkout, submitWorkout } from "../../queries/workouts";
 import { saveRoutine } from "../../queries/routines";
 
 export default function Workout() {
@@ -21,6 +21,13 @@ export default function Workout() {
     await saveRoutine(authUser.uid, workout);
     // TODO do some kind of toasting and then route to dashboard
     router.push("/dashboard");
+  };
+
+  const handleRepeatWorkout = async () => {
+    await submitWorkout(authUser.uid, {
+      ...workout,
+      date: (new Date()).toString(),
+    }, router);
   };
 
   const handleDelete = async () => {
@@ -39,6 +46,12 @@ export default function Workout() {
           onClick={() => handleSaveRoutine()}
         >
           Save for later
+        </button>
+        <button
+          className={buttonStyles.button}
+          onClick={handleRepeatWorkout}
+        >
+          Repeat workout
         </button>
       </div>
       <WorkoutBox showCheckbox={true} {...workout} />
