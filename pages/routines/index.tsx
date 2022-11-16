@@ -5,6 +5,7 @@ import { useAuth } from "../../utils/authContext";
 import { useEffect, useState } from "react";
 
 import styles from "../Dashboard.module.scss";
+import routineStyles from "./Routines.module.scss";
 import RoutineBox from "../../components/RoutineBox";
 import Link from "next/link";
 
@@ -38,13 +39,13 @@ export default function Routines() {
           <h2 className={styles.header}>
             {routines.length} Saved Routines ...
           </h2>
-          <label>
+          <label className={routineStyles.searchField}>
             <span>Search routines</span>
             <input value={search} type="text" onChange={(e) => setSearch(e.target.value)} />
           </label>
           {loading && <h1 className="title">Routines will be listed here</h1>}
           {!loading && routines.length > 0 && (
-            <ul>
+            <ul className={routineStyles.routinesList}>
               {filteredRoutines
                 .sort((a, b) => {
                   const aNote = a.note.toLowerCase();
