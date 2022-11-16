@@ -11,6 +11,7 @@ import Link from "next/link";
 export default function Routines() {
   const { authUser, loading } = useAuth();
   const [routines, setRoutines] = useState([]);
+  const [search, setSearch] = useState(null);
 
   useEffect(() => {
     if (authUser) {
@@ -28,6 +29,8 @@ export default function Routines() {
     }
   }, [authUser]);
 
+  const filteredRoutines = search ? routines.filter((r) => r.note.toLowerCase().includes(search.toLowerCase())) : routines
+
   if (!loading && authUser) {
     return (
       <LoggedIn>
@@ -35,10 +38,14 @@ export default function Routines() {
           <h2 className={styles.header}>
             {routines.length} Saved Routines ...
           </h2>
+          <label>
+            <span>Search routines</span>
+            <input value={search} type="text" onChange={(e) => setSearch(e.target.value)} />
+          </label>
           {loading && <h1 className="title">Routines will be listed here</h1>}
           {!loading && routines.length > 0 && (
             <ul>
-              {routines
+              {filteredRoutines
                 .sort((a, b) => {
                   const aNote = a.note.toLowerCase();
                   const bNote = b.note.toLowerCase();
