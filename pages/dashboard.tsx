@@ -19,6 +19,7 @@ export default function Dashboard() {
     <LoggedIn>
       <main className={styles.main}>
         <h2 className={styles.header}>{workouts.length} Workouts so far ...</h2>
+        <i className="fa-solid fa-user"></i>
         {loading && <h1 className="title">Workouts will be listed here</h1>}
         {!loading && workouts.length > 0 && (
           <ul>

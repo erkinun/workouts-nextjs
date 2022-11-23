@@ -97,11 +97,11 @@ const ExerciseRow = ({
         {...register(`exercises.${index}.typeOfTraining` as const)}
       />
       <div className={styles.buttonGroup}>
-        <button onClick={() => deleteExercise(id)} className="button">
-          Delete
+        <button data-type="delete" onClick={() => deleteExercise(id)} className="button">
+          <i className="fa-solid fa-trash-can"></i>
         </button>
         <button onClick={addExercise} className="button">
-          Add Another
+        <i className="fa-solid fa-plus"></i>
         </button>
       </div>
     </div>
