@@ -100,7 +100,7 @@ const ExerciseRow = ({
         {...register(`exercises.${index}.typeOfTraining` as const)}
       />
       <div className={styles.buttonGroup}>
-        <button type="delete" onClick={() => deleteExercise(id)} className="delete">
+        <button data-type="delete" onClick={() => deleteExercise(id)} className="delete">
           <FontAwesomeIcon icon={faTrashCan} />
         </button>
         <button onClick={addExercise} className="add">

@@ -60,7 +60,7 @@
 
     font-size: 12px;
 
-    > button[type="delete"] {
+    > button[data-type="delete"] {
       background-color: $red;
       color: $white;
     }
