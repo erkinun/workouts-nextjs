@@ -59,6 +59,11 @@
     height: 50px;
 
     font-size: 12px;
+
+    > button[type="delete"] {
+      background-color: $red;
+      color: $white;
+    }
   }
 
   .helper {

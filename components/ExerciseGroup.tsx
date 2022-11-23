@@ -1,5 +1,8 @@
 import { Control, useFieldArray, UseFormRegister } from "react-hook-form";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons'
 import styles from "./ExerciseGroup.module.scss";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export default function ExerciseGroup({
   control,
@@ -97,11 +100,11 @@ const ExerciseRow = ({
         {...register(`exercises.${index}.typeOfTraining` as const)}
       />
       <div className={styles.buttonGroup}>
-        <button onClick={() => deleteExercise(id)} className="button">
-          Delete
+        <button type="delete" onClick={() => deleteExercise(id)} className="delete">
+          <FontAwesomeIcon icon={faTrashCan} />
         </button>
-        <button onClick={addExercise} className="button">
-          Add Another
+        <button onClick={addExercise} className="add">
+          <FontAwesomeIcon icon={faPlus} />
         </button>
       </div>
     </div>
