@@ -5,7 +5,7 @@ export default function ExerciseGroup({
   control,
   register,
 }: ExerciseGroup.Props) {
-  const { fields, append, remove, insert } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "exercises",
   });
@@ -38,14 +38,7 @@ export default function ExerciseGroup({
                 index={i}
                 register={register}
                 deleteExercise={() => remove(i)}
-                addExercise={() =>
-                  insert(i + 1, {
-                    name: "",
-                    weight: "",
-                    effort: "",
-                    typeOfTraining: "",
-                  })
-                }
+                addExercise={() => addNewExercise()}
               />
             </li>
           ))}
@@ -70,6 +63,12 @@ const ExerciseRow = ({
   addExercise,
   id = "",
 }) => {
+
+  const handleAddExercise = (event) => {
+    event.preventDefault();
+    addExercise();
+  }
+
   return (
     <div className={styles.row} key={id}>
       <input
@@ -100,8 +99,8 @@ const ExerciseRow = ({
         <button data-type="delete" onClick={() => deleteExercise(id)} className="button">
           <i className="fa-solid fa-trash-can"></i>
         </button>
-        <button onClick={addExercise} className="button">
-        <i className="fa-solid fa-plus"></i>
+        <button onClick={handleAddExercise} className="button">
+          <i className="fa-solid fa-plus"></i>
         </button>
       </div>
     </div>
