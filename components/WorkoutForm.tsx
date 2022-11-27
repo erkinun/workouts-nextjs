@@ -23,10 +23,14 @@ export default function WorkoutForm({
   selectedRoutine = null,
 }) {
   const { register, handleSubmit, watch, control, reset } = useForm<Inputs>({
-    defaultValues: workout ?? {},
+    defaultValues: {
+      ...workout,
+      exercises: workout?.exercises || [],
+    } ?? {},
   });
 
   const watchRoutineId = watch("routineId");
+
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const workout = { ...data, id: self.crypto.randomUUID() };
@@ -68,7 +72,7 @@ export default function WorkoutForm({
         ))}
       </select>
 
-      <ExerciseGroup register={register} control={control} />
+      <ExerciseGroup exercises={workout?.exercises} key={workout} register={register} control={control} />
       <textarea
         placeholder={
           routineMode ? "name of the routine" : "notes about workout"
