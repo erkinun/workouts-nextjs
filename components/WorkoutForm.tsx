@@ -15,7 +15,6 @@ type Inputs = {
   saveAsRoutine: boolean;
 };
 // TODO make the border radius match throughout the form
-// TODO inserting a new exercise submits the fucking form
 export default function WorkoutForm({
   routines = [],
   onLogWorkout,
@@ -69,7 +68,6 @@ export default function WorkoutForm({
         ))}
       </select>
 
-      {/* {watchRoutineId && console.log(routines)} */}
       <ExerciseGroup register={register} control={control} />
       <textarea
         placeholder={
