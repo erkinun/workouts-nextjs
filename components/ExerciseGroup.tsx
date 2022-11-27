@@ -1,14 +1,29 @@
+import { useEffect } from "react";
 import { Control, useFieldArray, UseFormRegister } from "react-hook-form";
+import { Exercise } from "../utils/types";
 import styles from "./ExerciseGroup.module.scss";
+
+export namespace ExerciseGroup {
+  export type Props = {
+    register: UseFormRegister<any>;
+    control: Control<any, any>;
+    exercises: Array<Exercise>
+  };
+}
 
 export default function ExerciseGroup({
   control,
   register,
+  exercises
 }: ExerciseGroup.Props) {
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove, replace } = useFieldArray({
     control,
     name: "exercises",
   });
+
+  useEffect(() => {
+    replace(exercises)
+  }, [exercises])
 
   const addNewExercise = () => {
     append({
@@ -47,13 +62,6 @@ export default function ExerciseGroup({
       </div>
     </>
   );
-}
-
-export namespace ExerciseGroup {
-  export type Props = {
-    register: UseFormRegister<any>;
-    control: Control<any, any>;
-  };
 }
 
 const ExerciseRow = ({

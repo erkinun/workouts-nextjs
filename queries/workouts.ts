@@ -19,7 +19,6 @@ export const submitWorkout = async (
     });
 
     if (workout.saveAsRoutine) {
-      console.log("saving as routine");
       const routinesRef = ref(database, `users/${uid}/routines`);
       await push(routinesRef, {
         exercises: workout.exercises,
@@ -55,7 +54,6 @@ export const updateWorkout = async (uid: string, workout: Workout) => {
     });
 
     if (workout.saveAsRoutine) {
-      console.log("saving as routine");
       const routinesRef = ref(database, `users/${uid}/routines`);
       await push(routinesRef, {
         exercises: workout.exercises,
