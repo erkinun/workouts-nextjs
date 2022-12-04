@@ -4,6 +4,7 @@ export type Exercise = {
   effort: string;
   typeOfTraining: string;
   id?: string;
+  completed?: boolean;
 };
 
 export type Workout = {

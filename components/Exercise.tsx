@@ -6,13 +6,15 @@ const ExerciseBox = ({
   weight,
   effort,
   typeOfTraining,
+  completed = false,
   showCheckBox = false,
+  markExerciseAsDone
 }: Exercise.Props) => {
   return (
     <div className={styles.exercise}>
       {showCheckBox && (
         <div>
-          <input type="checkbox" />
+          <input checked={completed} onChange={(e) => markExerciseAsDone(name, e.target.checked)} type="checkbox" />
         </div>
       )}
       <div className={styles.name}>{name}</div>
@@ -28,6 +30,7 @@ const ExerciseBox = ({
 export namespace Exercise {
   export type Props = ExerciseType & {
     showCheckBox: Boolean;
+    markExerciseAsDone?: (exerciseName: string, done: boolean) => void;
   };
 }
 

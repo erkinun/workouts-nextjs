@@ -6,7 +6,7 @@ import { useWorkouts } from "../../utils/workoutContext";
 import styles from "./Workout.module.scss";
 import buttonStyles from "../../components/Button.module.scss";
 import { useAuth } from "../../utils/authContext";
-import { deleteWorkout, submitWorkout } from "../../queries/workouts";
+import { deleteWorkout, submitWorkout, updateWorkout } from "../../queries/workouts";
 import { saveRoutine } from "../../queries/routines";
 
 export default function Workout() {
@@ -29,6 +29,19 @@ export default function Workout() {
       date: (new Date()).toString(),
     }, router);
   };
+
+  const markExerciseAsDone = async (exerciseName: string, done: boolean) => {
+    const exercises = workout.exercises.map((exercise) => {
+      if (exercise.name === exerciseName) {
+        exercise.completed = done;
+      }
+      return exercise;
+    });
+    await updateWorkout(authUser.uid, {
+      ...workout,
+      exercises,
+    });
+  }
 
   const handleDelete = async () => {
     await deleteWorkout(authUser.uid, id.toString()); // id is not going to be an array
@@ -54,7 +67,7 @@ export default function Workout() {
           Repeat workout
         </button>
       </div>
-      <WorkoutBox showCheckbox={true} {...workout} />
+      <WorkoutBox markExerciseAsDone={markExerciseAsDone} showCheckbox={true} {...workout} />
       <button
         className={buttonStyles.deleteButton}
         onClick={() => handleDelete()}
