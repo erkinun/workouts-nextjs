@@ -74,7 +74,7 @@ const ExerciseRow = ({
   index: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>;
-  deleteExercise: () => void;
+  deleteExercise: (id: string) => void;
   addExercise: () => void;
   id?: string;
 }) => {
