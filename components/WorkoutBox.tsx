@@ -10,6 +10,7 @@ const WorkoutBox = ({
   date,
   exercises,
   showCheckbox = false,
+  markExerciseAsDone
 }: WorkoutEntry.Props) => {
   return (
     <div className={styles.workout}>
@@ -17,7 +18,7 @@ const WorkoutBox = ({
         <div className={styles.note}><i className="fa-solid fa-dumbbell"></i> {note}</div>
         <div className={styles.date}>{dayjs(date).format("DD/MM/YYYY")}</div>
       </div>
-      <ExercisesList showCheckBox={showCheckbox} exercises={exercises} />
+      <ExercisesList markExerciseAsDone={markExerciseAsDone} showCheckBox={showCheckbox} exercises={exercises} />
     </div>
   );
 };
@@ -25,6 +26,7 @@ const WorkoutBox = ({
 export namespace WorkoutEntry {
   export type Props = Workout & {
     showCheckbox: Boolean;
+    markExerciseAsDone?: (exerciseName: string, done: boolean) => void;
   };
 }
 
