@@ -1,8 +1,8 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useFirebaseAuth } from "../utils/authContext";
-import Loading from "./Loading";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useFirebaseAuth } from '../utils/authContext';
+import Loading from './Loading';
 
 export default function LoggedIn(props) {
   const { authUser, loading } = useFirebaseAuth();
@@ -10,7 +10,7 @@ export default function LoggedIn(props) {
 
   // Listen for changes on loading and authUser, redirect if needed
   useEffect(() => {
-    if (!loading && !authUser) router.push("/");
+    if (!loading && !authUser) router.push('/');
   }, [authUser, loading]);
 
   if (authUser) {
@@ -27,7 +27,7 @@ export default function LoggedIn(props) {
       </div>
     );
   } else if (!loading) {
-    router.push("/");
+    router.push('/');
     return <div>Not Logged in</div>;
   } else {
     return <Loading />;

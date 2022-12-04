@@ -1,24 +1,24 @@
-export type Exercise = {
+export interface Exercise {
   name: string;
   weight: string;
   effort: string;
   typeOfTraining: string;
   id?: string;
   completed?: boolean;
-};
+}
 
-export type Workout = {
+export interface Workout {
   backendId?: string;
   id: string;
   date: string; // for now TODO change it to some date type in TS
-  exercises: Array<Exercise>;
+  exercises: Exercise[];
   note: string;
   saveAsRoutine?: boolean;
-};
+}
 
-export type Routine = {
+export interface Routine {
   backendId?: string;
   id?: string;
-  exercises: Array<Exercise>;
+  exercises: Exercise[];
   note: string;
-};
+}

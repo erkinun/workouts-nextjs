@@ -1,9 +1,9 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import buttonStyles from "../../components/Button.module.scss";
-import { useAuth } from "../../utils/authContext";
-import { authFn } from "../../utils/firebase";
-import styles from "./Login.module.scss";
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import buttonStyles from '../../components/Button.module.scss';
+import { useAuth } from '../../utils/authContext';
+import { authFn } from '../../utils/firebase';
+import styles from './Login.module.scss';
 
 export default function Login() {
   const router = useRouter();
@@ -11,7 +11,7 @@ export default function Login() {
 
   useEffect(() => {
     if (!loading && authUser) {
-      router.push("/dashboard");
+      router.push('/dashboard');
     }
   }, [loading, authUser]);
 

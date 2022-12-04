@@ -1,4 +1,4 @@
-@import "../styles/base/settings";
+@import '../styles/base/settings';
 
 .exerciseList {
   list-style: none;
@@ -60,7 +60,7 @@
 
     font-size: 12px;
 
-    > button[data-type="delete"] {
+    > button[data-type='delete'] {
       background-color: $red;
       color: $white;
     }

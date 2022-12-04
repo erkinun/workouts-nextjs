@@ -1,41 +1,37 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
-import { ref, onValue } from "firebase/database";
-import { database } from "../utils/firebase";
-import { Workout } from "./types";
+import { createContext, useContext, useEffect, useReducer } from 'react';
+import { ref, onValue } from 'firebase/database';
+import { database } from '../utils/firebase';
+import { Workout } from './types';
 
-type Payload = { payload: Workout };
+interface Payload {
+  payload: Workout;
+}
 
 type ActionType =
-  | { type: "add" }
-  | { type: "remove"; id: string }
-  | { type: "update" }
-  | { type: "set"; workouts: Workout[] };
+  | { type: 'add' }
+  | { type: 'remove'; id: string }
+  | { type: 'update' }
+  | { type: 'set'; workouts: Workout[] };
 
 type Action = ActionType & Payload;
 type Dispatch = (action: Action) => void;
-type State = Array<Workout>;
+type State = Workout[];
 
 // TODO add routines to this state too
 // TODO does it have any meaning to have this reducer without updating the firebase db
 // TODO maybe remove it and make it just a state?
 function workoutsReducer(state: State, action: Action) {
   switch (action.type) {
-    case "set":
+    case 'set':
       return action.workouts;
 
-    case "add":
+    case 'add':
       return [...state, action.payload];
 
-    case "remove":
+    case 'remove':
       return state.filter((workout) => workout.backendId !== action.id);
 
-    case "update":
+    case 'update':
       return state.map((workout) => {
         if (workout.id === action.payload.id) {
           return action.payload;
@@ -53,8 +49,7 @@ const WorkoutContext = createContext<
 >(undefined);
 
 export const WorkoutProvider = ({ children, authUser }) => {
-  const [initialWorkouts, setInitialWorkouts] = useState([]);
-  const [workouts, dispatch] = useReducer(workoutsReducer, initialWorkouts);
+  const [workouts, dispatch] = useReducer(workoutsReducer, []);
   const value = { workouts, dispatch };
 
   useEffect(() => {
@@ -70,7 +65,7 @@ export function useWorkouts() {
   const context = useContext(WorkoutContext);
 
   if (context === undefined) {
-    throw new Error("useWorkouts must be used within a WorkoutsProvider");
+    throw new Error('useWorkouts must be used within a WorkoutsProvider');
   }
 
   return context;
@@ -80,7 +75,7 @@ export function loadWorkouts(authUser, dispatch) {
   if (authUser) {
     const workoutsRef = ref(database, `users/${authUser.uid}/workouts`);
     onValue(workoutsRef, (snapshot) => {
-      const workouts: Array<any> = [];
+      const workouts: Workout[] = [];
       snapshot.forEach((child) => {
         workouts.push({
           backendId: child.key,
@@ -88,7 +83,7 @@ export function loadWorkouts(authUser, dispatch) {
         });
       });
 
-      dispatch({ type: "set", workouts, payload: null });
+      dispatch({ type: 'set', workouts, payload: null });
     });
   }
 }

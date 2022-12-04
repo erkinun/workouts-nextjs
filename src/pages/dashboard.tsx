@@ -1,11 +1,11 @@
-import LoggedIn from "../components/LoggedIn";
-import { useAuth } from "../utils/authContext";
-import WorkoutBox from "../components/WorkoutBox";
+import LoggedIn from '../components/LoggedIn';
+import { useAuth } from '../utils/authContext';
+import WorkoutBox from '../components/WorkoutBox';
 
-import styles from "./Dashboard.module.scss";
-import Link from "next/link";
-import { useWorkouts } from "../utils/workoutContext";
-import Loading from "../components/Loading";
+import styles from './Dashboard.module.scss';
+import Link from 'next/link';
+import { useWorkouts } from '../utils/workoutContext';
+import Loading from '../components/Loading';
 
 export default function Dashboard() {
   const { loading } = useAuth();
@@ -25,12 +25,12 @@ export default function Dashboard() {
             {workouts
               .sort(
                 (a, b) =>
-                  new Date(b.date).getTime() - new Date(a.date).getTime()
+                  new Date(b.date).getTime() - new Date(a.date).getTime(),
               )
               .map((w) => (
                 <li key={w.backendId}>
                   <Link href={`/workouts/${w.backendId}`} key={w.backendId}>
-                    <a>
+                    <a href={`/workouts/${w.backendId}`}>
                       <WorkoutBox showCheckbox={false} {...w} />
                     </a>
                   </Link>

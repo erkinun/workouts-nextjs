@@ -1,13 +1,14 @@
-import LoggedIn from "../../components/LoggedIn";
-import { ref, onValue } from "firebase/database";
-import { database } from "../../utils/firebase";
-import { useAuth } from "../../utils/authContext";
-import { useEffect, useState } from "react";
+import LoggedIn from '../../components/LoggedIn';
+import { ref, onValue } from 'firebase/database';
+import { database } from '../../utils/firebase';
+import { useAuth } from '../../utils/authContext';
+import { useEffect, useState } from 'react';
 
-import styles from "../Dashboard.module.scss";
-import routineStyles from "./Routines.module.scss";
-import RoutineBox from "../../components/RoutineBox";
-import Link from "next/link";
+import styles from '../Dashboard.module.scss';
+import routineStyles from './Routines.module.scss';
+import { RoutineBox } from '../../components/RoutineBox';
+import Link from 'next/link';
+import { Routine } from '../../utils/types';
 
 export default function Routines() {
   const { authUser, loading } = useAuth();
@@ -18,7 +19,7 @@ export default function Routines() {
     if (authUser) {
       const routinesRef = ref(database, `users/${authUser.uid}/routines`);
       onValue(routinesRef, (snapshot) => {
-        const routines: Array<any> = [];
+        const routines: Routine[] = [];
         snapshot.forEach((child) => {
           routines.push({
             backendId: child.key,
@@ -30,7 +31,11 @@ export default function Routines() {
     }
   }, [authUser]);
 
-  const filteredRoutines = search ? routines.filter((r) => r.note.toLowerCase().includes(search.toLowerCase())) : routines
+  const filteredRoutines = search
+    ? routines.filter((r) =>
+        r.note.toLowerCase().includes(search.toLowerCase()),
+      )
+    : routines;
 
   if (!loading && authUser) {
     return (
@@ -41,7 +46,11 @@ export default function Routines() {
           </h2>
           <label className={routineStyles.searchField}>
             <span>Search routines</span>
-            <input value={search} type="text" onChange={(e) => setSearch(e.target.value)} />
+            <input
+              value={search}
+              type="text"
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </label>
           {loading && <h1 className="title">Routines will be listed here</h1>}
           {!loading && routines.length > 0 && (
@@ -55,7 +64,7 @@ export default function Routines() {
                 .map((r) => (
                   <li>
                     <Link href={`/routines/${r.backendId}`} key={r.backendId}>
-                      <a>
+                      <a href={`/routines/${r.backendId}`}>
                         <RoutineBox key={r.backendId} {...r} />
                       </a>
                     </Link>

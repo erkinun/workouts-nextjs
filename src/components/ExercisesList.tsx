@@ -1,12 +1,12 @@
-import { Exercise as ExerciseType } from "../utils/types";
-import ExerciseBox from "./Exercise";
-import styles from "./ExerciseList.module.scss";
+import { Exercise as ExerciseType } from '../utils/types';
+import ExerciseBox from './Exercise';
+import styles from './ExerciseList.module.scss';
 
 const ExerciseList = ({
   exercises = [],
   showCheckBox = false,
-  markExerciseAsDone
-}: ExerciseList.Props) => {
+  markExerciseAsDone,
+}: ExerciseListProps) => {
   return (
     <div className={styles.listItem}>
       <div className={styles.exerciseList}>
@@ -24,12 +24,10 @@ const ExerciseList = ({
   );
 };
 
-export namespace ExerciseList {
-  export type Props = {
-    exercises: Array<ExerciseType>;
-    showCheckBox: Boolean;
-    markExerciseAsDone?: (exerciseName: string, done: boolean) => void;
-  };
-}
+export type ExerciseListProps = {
+  exercises: ExerciseType[];
+  showCheckBox: boolean;
+  markExerciseAsDone?: (exerciseName: string, done: boolean) => void;
+};
 
 export default ExerciseList;

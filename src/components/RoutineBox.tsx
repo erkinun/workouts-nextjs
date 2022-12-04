@@ -1,13 +1,15 @@
-import { Routine } from "../utils/types";
-import ExercisesList from "./ExercisesList";
+import { Routine } from '../utils/types';
+import ExercisesList from './ExercisesList';
 
-import styles from "./Workout.module.scss";
+import styles from './Workout.module.scss';
 
-const RoutineBox = ({ note, exercises }: RoutineBox.Props) => {
+export const RoutineBox = ({ note, exercises }: RoutineBoxProps) => {
   return (
     <div className={styles.workout}>
       <div className={styles.header}>
-        <div className="note"><i className="fa-solid fa-pen"></i> {note}</div>
+        <div className="note">
+          <i className="fa-solid fa-pen"></i> {note}
+        </div>
         <div className="date"></div>
       </div>
       <ExercisesList showCheckBox={false} exercises={exercises} />
@@ -15,8 +17,4 @@ const RoutineBox = ({ note, exercises }: RoutineBox.Props) => {
   );
 };
 
-export namespace RoutineBox {
-  export type Props = Routine;
-}
-
-export default RoutineBox;
+export type RoutineBoxProps = Routine;

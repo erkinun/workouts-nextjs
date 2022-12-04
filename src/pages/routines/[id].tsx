@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import WorkoutBox from "../../components/WorkoutBox";
-import styles from "../workouts/Workout.module.scss";
-import buttonStyles from "../../components/Button.module.scss";
-import { useAuth } from "../../utils/authContext";
-import useRoutines, { deleteRoutine } from "../../queries/routines";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import WorkoutBox from '../../components/WorkoutBox';
+import styles from '../workouts/Workout.module.scss';
+import buttonStyles from '../../components/Button.module.scss';
+import { useAuth } from '../../utils/authContext';
+import useRoutines, { deleteRoutine } from '../../queries/routines';
 
 export default function AddRoutine() {
   const router = useRouter();
@@ -17,7 +17,7 @@ export default function AddRoutine() {
   const handleDelete = async () => {
     await deleteRoutine(authUser.uid, id.toString()); // id is not going to be an array
     // TODO add a toast and then route to routines
-    router.push("/routines");
+    router.push('/routines');
   };
 
   return (
@@ -33,7 +33,7 @@ export default function AddRoutine() {
       <WorkoutBox showCheckbox={false} {...routine} />
       <button
         className={buttonStyles.deleteButton}
-        onClick={() => handleDelete()}
+        onClick={async () => await handleDelete()}
       >
         Delete Routine
       </button>

@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { auth } from "./firebase";
+import { createContext, useContext, useState, useEffect } from 'react';
+import { auth } from './firebase';
 
 // TODO move the auth information to session so we can use it on the server
 // TODO setup prettier, eslint and husky
