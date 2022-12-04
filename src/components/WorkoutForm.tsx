@@ -1,19 +1,19 @@
-import dayjs from "dayjs";
-import { useEffect } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { Exercise } from "../utils/types";
-import ExerciseGroup from "./ExerciseGroup";
+import dayjs from 'dayjs';
+import { useEffect } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { Exercise } from '../utils/types';
+import ExerciseGroup from './ExerciseGroup';
 
-import styles from "./WorkoutForm.module.scss";
+import styles from './WorkoutForm.module.scss';
 
-type Inputs = {
+interface Inputs {
   backendId: string;
   date: string;
   routineId: string;
-  exercises: Array<Exercise>;
+  exercises: Exercise[];
   note: string;
   saveAsRoutine: boolean;
-};
+}
 // TODO make the border radius match throughout the form
 export default function WorkoutForm({
   routines = [],
@@ -23,14 +23,14 @@ export default function WorkoutForm({
   selectedRoutine = null,
 }) {
   const { register, handleSubmit, watch, control, reset } = useForm<Inputs>({
-    defaultValues: {
-      ...workout,
-      exercises: workout?.exercises || [],
-    } ?? {},
+    defaultValues:
+      {
+        ...workout,
+        exercises: workout?.exercises || [],
+      } ?? {},
   });
 
-  const watchRoutineId = watch("routineId");
-
+  const watchRoutineId = watch('routineId');
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const workout = { ...data, id: self.crypto.randomUUID() };
@@ -52,17 +52,17 @@ export default function WorkoutForm({
       {
         // TODO use the current time of the day with date
       }
-      <input type="hidden" name="backendId" {...register("backendId")} />
+      <input type="hidden" name="backendId" {...register('backendId')} />
       <input
         type="date"
-        defaultValue={dayjs(workout?.date ?? Date.now()).format("YYYY-MM-DD")}
-        {...register("date")}
+        defaultValue={dayjs(workout?.date ?? Date.now()).format('YYYY-MM-DD')}
+        {...register('date')}
       />
       <label htmlFor="routines">Pick a routine</label>
       <select
         name="routines"
         className={styles.routineSelect}
-        {...register("routineId")}
+        {...register('routineId')}
       >
         <option></option>
         {routines.map((r) => (
@@ -72,24 +72,29 @@ export default function WorkoutForm({
         ))}
       </select>
 
-      <ExerciseGroup exercises={workout?.exercises} key={workout} register={register} control={control} />
+      <ExerciseGroup
+        exercises={workout?.exercises}
+        key={workout}
+        register={register}
+        control={control}
+      />
       <textarea
         placeholder={
-          routineMode ? "name of the routine" : "notes about workout"
+          routineMode ? 'name of the routine' : 'notes about workout'
         }
         className="textarea-input"
         defaultValue={workout?.note}
-        {...register("note", { required: true })}
+        {...register('note', { required: true })}
       />
 
       {!routineMode && (
         <section>
           <label htmlFor="saveAsRoutine">
-            Save as a routine{" "}
+            Save as a routine{' '}
             <input
               type="checkbox"
               name="saveAsRoutine"
-              {...register("saveAsRoutine")}
+              {...register('saveAsRoutine')}
             />
           </label>
         </section>
@@ -97,7 +102,7 @@ export default function WorkoutForm({
 
       <div>
         <button type="submit" className="button">
-          {routineMode ? "Save Routine" : "Save Workout"}
+          {routineMode ? 'Save Routine' : 'Save Workout'}
         </button>
       </div>
     </form>

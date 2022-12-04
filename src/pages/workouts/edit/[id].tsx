@@ -1,12 +1,12 @@
-import { useRouter } from "next/router";
-import LoggedIn from "../../../components/LoggedIn";
-import WorkoutForm from "../../../components/WorkoutForm";
-import useRoutines from "../../../queries/routines";
-import { updateWorkout } from "../../../queries/workouts";
-import { useAuth } from "../../../utils/authContext";
-import { useWorkouts } from "../../../utils/workoutContext";
+import { useRouter } from 'next/router';
+import LoggedIn from '../../../components/LoggedIn';
+import WorkoutForm from '../../../components/WorkoutForm';
+import useRoutines from '../../../queries/routines';
+import { updateWorkout } from '../../../queries/workouts';
+import { useAuth } from '../../../utils/authContext';
+import { useWorkouts } from '../../../utils/workoutContext';
 
-import styles from "../../Dashboard.module.scss";
+import styles from '../../Dashboard.module.scss';
 
 // TODO doesn't populate the stupid exercises for some reason when reloaded
 export default function EditWorkout() {
@@ -19,7 +19,7 @@ export default function EditWorkout() {
 
   const submitWorkout = async (workout) => {
     await updateWorkout(authUser.uid, workout);
-    router.push("/dashboard");
+    router.push('/dashboard');
   };
 
   if (!loading && authUser) {

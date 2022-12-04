@@ -1,8 +1,8 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import LoadingPage from "../components/LoadingPage";
-import { useAuth } from "../utils/authContext";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import LoadingPage from '../components/LoadingPage';
+import { useAuth } from '../utils/authContext';
 
 export default function Home() {
   const router = useRouter();
@@ -10,9 +10,9 @@ export default function Home() {
 
   useEffect(() => {
     if (!loading && authUser) {
-      router.push("/dashboard");
+      router.push('/dashboard');
     } else if (!loading && !authUser) {
-      router.push("/login");
+      router.push('/login');
     }
   }, [authUser, loading]);
 

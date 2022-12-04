@@ -1,13 +1,17 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import WorkoutBox from "../../components/WorkoutBox";
-import { useWorkouts } from "../../utils/workoutContext";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import WorkoutBox from '../../components/WorkoutBox';
+import { useWorkouts } from '../../utils/workoutContext';
 
-import styles from "./Workout.module.scss";
-import buttonStyles from "../../components/Button.module.scss";
-import { useAuth } from "../../utils/authContext";
-import { deleteWorkout, submitWorkout, updateWorkout } from "../../queries/workouts";
-import { saveRoutine } from "../../queries/routines";
+import styles from './Workout.module.scss';
+import buttonStyles from '../../components/Button.module.scss';
+import { useAuth } from '../../utils/authContext';
+import {
+  deleteWorkout,
+  submitWorkout,
+  updateWorkout,
+} from '../../queries/workouts';
+import { saveRoutine } from '../../queries/routines';
 
 export default function Workout() {
   const router = useRouter();
@@ -20,14 +24,18 @@ export default function Workout() {
   const handleSaveRoutine = async () => {
     await saveRoutine(authUser.uid, workout);
     // TODO do some kind of toasting and then route to dashboard
-    router.push("/dashboard");
+    router.push('/dashboard');
   };
 
   const handleRepeatWorkout = async () => {
-    await submitWorkout(authUser.uid, {
-      ...workout,
-      date: (new Date()).toString(),
-    }, router);
+    await submitWorkout(
+      authUser.uid,
+      {
+        ...workout,
+        date: new Date().toString(),
+      },
+      router,
+    );
   };
 
   const markExerciseAsDone = async (exerciseName: string, done: boolean) => {
@@ -41,11 +49,11 @@ export default function Workout() {
       ...workout,
       exercises,
     });
-  }
+  };
 
   const handleDelete = async () => {
     await deleteWorkout(authUser.uid, id.toString()); // id is not going to be an array
-    router.push("/dashboard");
+    router.push('/dashboard');
   };
 
   return (
@@ -56,21 +64,22 @@ export default function Workout() {
         </Link>
         <button
           className={buttonStyles.button}
-          onClick={() => handleSaveRoutine()}
+          onClick={async () => await handleSaveRoutine()}
         >
           Save for later
         </button>
-        <button
-          className={buttonStyles.button}
-          onClick={handleRepeatWorkout}
-        >
+        <button className={buttonStyles.button} onClick={handleRepeatWorkout}>
           Repeat workout
         </button>
       </div>
-      <WorkoutBox markExerciseAsDone={markExerciseAsDone} showCheckbox={true} {...workout} />
+      <WorkoutBox
+        markExerciseAsDone={markExerciseAsDone}
+        showCheckbox={true}
+        {...workout}
+      />
       <button
         className={buttonStyles.deleteButton}
-        onClick={() => handleDelete()}
+        onClick={async () => await handleDelete()}
       >
         Delete Workout
       </button>

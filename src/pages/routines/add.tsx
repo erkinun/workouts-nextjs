@@ -1,11 +1,11 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import styles from "../Dashboard.module.scss";
-import { useAuth } from "../../utils/authContext";
-import useRoutines, { saveRoutine } from "../../queries/routines";
-import LoggedIn from "../../components/LoggedIn";
-import WorkoutForm from "../../components/WorkoutForm";
-import { Routine } from "../../utils/types";
+import styles from '../Dashboard.module.scss';
+import { useAuth } from '../../utils/authContext';
+import useRoutines, { saveRoutine } from '../../queries/routines';
+import LoggedIn from '../../components/LoggedIn';
+import WorkoutForm from '../../components/WorkoutForm';
+import { Routine } from '../../utils/types';
 
 export default function EditRoutine() {
   const { authUser, loading } = useAuth();
@@ -14,7 +14,7 @@ export default function EditRoutine() {
 
   const submitRoutine = async (routine: Routine) => {
     await saveRoutine(authUser.uid, routine);
-    router.push("/routines");
+    router.push('/routines');
   };
 
   if (!loading && authUser) {

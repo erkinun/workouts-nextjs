@@ -1,13 +1,13 @@
-import { push, ref, remove, update } from "firebase/database";
-import { NextRouter } from "next/router";
-import { database } from "../utils/firebase";
-import { Workout } from "../utils/types";
+import { push, ref, remove, update } from 'firebase/database';
+import { NextRouter } from 'next/router';
+import { database } from '../utils/firebase';
+import { Workout } from '../utils/types';
 
 // TODO optional maybe use react query? or maybe just in react context
 export const submitWorkout = async (
   uid: string,
   workout: Workout,
-  router: NextRouter
+  router: NextRouter,
 ) => {
   try {
     const workoutsRef = ref(database, `users/${uid}/workouts`);
@@ -25,7 +25,7 @@ export const submitWorkout = async (
         note: workout.note,
       });
     }
-    router.push("/dashboard");
+    router.push('/dashboard');
   } catch (error) {
     console.error(error);
   }
@@ -44,7 +44,7 @@ export const updateWorkout = async (uid: string, workout: Workout) => {
   try {
     const workoutsRef = ref(
       database,
-      `users/${uid}/workouts/${workout.backendId}`
+      `users/${uid}/workouts/${workout.backendId}`,
     );
     await update(workoutsRef, {
       date: workout.date,

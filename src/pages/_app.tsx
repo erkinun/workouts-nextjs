@@ -1,8 +1,8 @@
-import type { AppProps } from "next/app";
-import Layout from "../components/Layout";
-import "../styles.css";
-import { AuthUserContext, useFirebaseAuth } from "../utils/authContext";
-import { WorkoutProvider } from "../utils/workoutContext";
+import type { AppProps } from 'next/app';
+import Layout from '../components/Layout';
+import '../styles.css';
+import { AuthUserContext, useFirebaseAuth } from '../utils/authContext';
+import { WorkoutProvider } from '../utils/workoutContext';
 
 // TODO consolidate all todos together
 // TODO add the workouts and routines to the react context so we don't have to fetch them every time

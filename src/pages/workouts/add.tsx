@@ -1,11 +1,11 @@
-import { useRouter } from "next/router";
-import LoggedIn from "../../components/LoggedIn";
-import WorkoutForm from "../../components/WorkoutForm";
-import { useAuth } from "../../utils/authContext";
-import styles from "../Dashboard.module.scss";
-import useRoutines from "../../queries/routines";
-import { Workout } from "../../utils/types";
-import { submitWorkout } from "../../queries/workouts";
+import { useRouter } from 'next/router';
+import LoggedIn from '../../components/LoggedIn';
+import WorkoutForm from '../../components/WorkoutForm';
+import { useAuth } from '../../utils/authContext';
+import styles from '../Dashboard.module.scss';
+import useRoutines from '../../queries/routines';
+import { Workout } from '../../utils/types';
+import { submitWorkout } from '../../queries/workouts';
 
 export default function AddWorkout() {
   const { authUser, loading } = useAuth();
@@ -19,8 +19,8 @@ export default function AddWorkout() {
         <main className={styles.main}>
           <h2 className={styles.header}>Add Workout</h2>
           <WorkoutForm
-            onLogWorkout={(workout: Workout) =>
-              submitWorkout(authUser.uid, workout, router)
+            onLogWorkout={async (workout: Workout) =>
+              await submitWorkout(authUser.uid, workout, router)
             }
             routines={routines}
             selectedRoutine={routineId}

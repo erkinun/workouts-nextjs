@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { ref, onValue, update, push, remove } from "firebase/database";
-import { database } from "../utils/firebase";
-import { Routine } from "../utils/types";
+import { useEffect, useState } from 'react';
+import { ref, onValue, update, push, remove } from 'firebase/database';
+import { database } from '../utils/firebase';
+import { Routine } from '../utils/types';
 // TODO move reading routines into workout context so we don't call it every time
 export default function useRoutines(uid: string) {
   const [routines, setRoutines] = useState([]);
@@ -9,7 +9,7 @@ export default function useRoutines(uid: string) {
     if (uid) {
       const routinesRef = ref(database, `users/${uid}/routines`);
       onValue(routinesRef, (snapshot) => {
-        const routines: Array<any> = [];
+        const routines: Routine[] = [];
         snapshot.forEach((child) => {
           routines.push({
             backendId: child.key,
@@ -28,7 +28,7 @@ export const updateRoutine = async (uid: string, routine: Routine) => {
   try {
     const workoutsRef = ref(
       database,
-      `users/${uid}/routines/${routine.backendId}`
+      `users/${uid}/routines/${routine.backendId}`,
     );
     await update(workoutsRef, {
       note: routine.note,

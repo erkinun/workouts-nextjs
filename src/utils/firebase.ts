@@ -1,5 +1,5 @@
-import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
+import { initializeApp, FirebaseOptions } from 'firebase/app';
+import { getDatabase } from 'firebase/database';
 import {
   getAuth,
   setPersistence,
@@ -7,8 +7,7 @@ import {
   getRedirectResult,
   GoogleAuthProvider,
   browserSessionPersistence,
-} from "firebase/auth";
-import { FirebaseOptions } from "firebase/app";
+} from 'firebase/auth';
 
 const config: FirebaseOptions = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -21,7 +20,7 @@ const config: FirebaseOptions = {
 
 // TODO if you need SSR auth check this out: https://colinhacks.com/essays/nextjs-firebase-authentication
 
-const app = initializeApp(config, "workouts");
+const app = initializeApp(config, 'workouts');
 
 export const database = getDatabase(app);
 export const auth = getAuth(app);
@@ -39,9 +38,9 @@ export const isSignedIn = async () => {
   const result = await getRedirectResult(auth);
   if (result) {
     // This is the signed-in user
-    const user = result.user;
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
+    // const user = result.user;
+    // const credential = GoogleAuthProvider.credentialFromResult(result);
+    // const token = credential.accessToken;
 
     return true;
   }
