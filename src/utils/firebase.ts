@@ -3,10 +3,10 @@ import { getDatabase } from 'firebase/database';
 import {
   getAuth,
   setPersistence,
-  signInWithRedirect,
   getRedirectResult,
   GoogleAuthProvider,
   browserSessionPersistence,
+  signInWithPopup,
 } from 'firebase/auth';
 
 const config: FirebaseOptions = {
@@ -31,7 +31,7 @@ export { app, googleAuthProvider };
 
 export const authFn = async () => {
   setPersistence(auth, browserSessionPersistence);
-  await signInWithRedirect(auth, googleAuthProvider);
+  await signInWithPopup(auth, googleAuthProvider);
 };
 
 export const isSignedIn = async () => {
