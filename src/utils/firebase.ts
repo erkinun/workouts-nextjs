@@ -5,8 +5,8 @@ import {
   setPersistence,
   getRedirectResult,
   GoogleAuthProvider,
-  browserSessionPersistence,
   signInWithPopup,
+  browserLocalPersistence,
 } from 'firebase/auth';
 
 const config: FirebaseOptions = {
@@ -30,7 +30,7 @@ const googleAuthProvider = new GoogleAuthProvider();
 export { app, googleAuthProvider };
 
 export const authFn = async () => {
-  setPersistence(auth, browserSessionPersistence);
+  setPersistence(auth, browserLocalPersistence);
   await signInWithPopup(auth, googleAuthProvider);
 };
 
