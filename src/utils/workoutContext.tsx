@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
-import { ref, onValue } from 'firebase/database';
+import { ref, onValue, query, limitToLast } from 'firebase/database';
 import { database } from '../utils/firebase';
 import { Workout } from './types';
 
@@ -73,7 +73,10 @@ export function useWorkouts() {
 
 export function loadWorkouts(authUser, dispatch) {
   if (authUser) {
-    const workoutsRef = ref(database, `users/${authUser.uid}/workouts`);
+    const workoutsRef = query(
+      ref(database, `users/${authUser.uid}/workouts`),
+      limitToLast(20),
+    );
     onValue(workoutsRef, (snapshot) => {
       const workouts: Workout[] = [];
       snapshot.forEach((child) => {
