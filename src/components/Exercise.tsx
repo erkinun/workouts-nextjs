@@ -15,6 +15,7 @@ const ExerciseBox = ({
       {showCheckBox && (
         <div>
           <input
+            className={styles.workoutCheckbox}
             checked={completed}
             onChange={(e) => markExerciseAsDone(name, e.target.checked)}
             type="checkbox"

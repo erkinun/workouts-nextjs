@@ -5,6 +5,7 @@ import { AuthUserContext, useFirebaseAuth } from '../utils/authContext';
 import { WorkoutProvider } from '../utils/workoutContext';
 
 // TODO consolidate all todos together
+// TODO upgrade nextjs and react
 // TODO add the workouts and routines to the react context so we don't have to fetch them every time
 // TODO add a toast to the delete routine and delete workout
 // TODO handle the NAV in a better way

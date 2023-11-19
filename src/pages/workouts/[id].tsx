@@ -60,16 +60,24 @@ export default function Workout() {
     <div className={styles.contentContainer}>
       <div>
         <Link href={`/workouts/edit/${id}`}>
-          <button className={buttonStyles.button}>Edit</button>
+          <button className={buttonStyles.button}>
+            <i className="fa-regular fa-pen-to-square"></i>
+          </button>
         </Link>
         <button
           className={buttonStyles.button}
           onClick={async () => await handleSaveRoutine()}
         >
-          Save for later
+          <i className="fa-regular fa-bookmark"></i>
         </button>
         <button className={buttonStyles.button} onClick={handleRepeatWorkout}>
-          Repeat workout
+          <i className="fa-solid fa-repeat"></i>
+        </button>
+        <button
+          className={buttonStyles.deleteButton}
+          onClick={async () => await handleDelete()}
+        >
+          <i className="fa-solid fa-trash-can"></i>
         </button>
       </div>
       <WorkoutBox
@@ -77,12 +85,6 @@ export default function Workout() {
         showCheckbox={true}
         {...workout}
       />
-      <button
-        className={buttonStyles.deleteButton}
-        onClick={async () => await handleDelete()}
-      >
-        Delete Workout
-      </button>
     </div>
   );
 }
