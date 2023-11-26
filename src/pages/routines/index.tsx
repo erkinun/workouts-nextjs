@@ -64,9 +64,7 @@ export default function Routines() {
                 .map((r) => (
                   <li>
                     <Link href={`/routines/${r.backendId}`} key={r.backendId}>
-                      <a href={`/routines/${r.backendId}`}>
-                        <RoutineBox key={r.backendId} {...r} />
-                      </a>
+                      <RoutineBox key={r.backendId} {...r} />
                     </Link>
                   </li>
                 ))}

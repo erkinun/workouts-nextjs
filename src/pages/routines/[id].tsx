@@ -23,10 +23,10 @@ export default function AddRoutine() {
   return (
     <div className={styles.contentContainer}>
       <div>
-        <Link href={`/routines/edit/${id}`}>
+        <Link href={`/routines/edit/${id}`} legacyBehavior>
           <button className={buttonStyles.button}>Edit</button>
         </Link>
-        <Link href={`/workouts/add?routineId=${id}`}>
+        <Link href={`/workouts/add?routineId=${id}`} legacyBehavior>
           <button className={buttonStyles.button}>Use in workout</button>
         </Link>
       </div>

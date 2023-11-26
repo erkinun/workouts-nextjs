@@ -30,9 +30,7 @@ export default function Dashboard() {
               .map((w) => (
                 <li key={w.backendId}>
                   <Link href={`/workouts/${w.backendId}`} key={w.backendId}>
-                    <a href={`/workouts/${w.backendId}`}>
-                      <WorkoutBox showCheckbox={false} {...w} />
-                    </a>
+                    <WorkoutBox showCheckbox={false} {...w} />
                   </Link>
                 </li>
               ))}
