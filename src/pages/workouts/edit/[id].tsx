@@ -7,6 +7,7 @@ import { useAuth } from '../../../utils/authContext';
 import { useWorkouts } from '../../../utils/workoutContext';
 
 import styles from '../../Dashboard.module.scss';
+import { useState } from 'react';
 
 // TODO doesn't populate the stupid exercises for some reason when reloaded
 export default function EditWorkout() {
@@ -17,8 +18,11 @@ export default function EditWorkout() {
   const { id } = router.query;
   const workout = workouts.find((workout) => workout.backendId === id);
 
+  const [saved, setSaved] = useState(false);
+
   const submitWorkout = async (workout) => {
     await updateWorkout(authUser.uid, workout);
+    setSaved(true);
     router.push('/dashboard');
   };
 
@@ -26,7 +30,7 @@ export default function EditWorkout() {
     return (
       <LoggedIn>
         <main className={styles.main}>
-          <h2 className={styles.header}>Edit Workout</h2>
+          <h2 className={styles.header}>Edit Workout {saved && ' - Saved'}</h2>
           <WorkoutForm
             onLogWorkout={submitWorkout}
             workout={workout}
