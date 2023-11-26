@@ -21,19 +21,13 @@ export default function Navbar() {
       <nav className={styles.content}>
         <div className={styles.navigation}>
           <Link href="/dashboard">
-            <a href="/dashboard">
-              <h1 className={styles.title}>Workouts</h1>
-            </a>
+            <h1 className={styles.title}>Workouts</h1>
           </Link>
           <Link href="/workouts/add">
-            <a href="/workouts/add">
-              <h3 className={styles.section}>Log Workout</h3>
-            </a>
+            <h3 className={styles.section}>Log Workout</h3>
           </Link>
           <Link href="/routines">
-            <a href="/routines">
-              <h3 className={styles.section}>Routines</h3>
-            </a>
+            <h3 className={styles.section}>Routines</h3>
           </Link>
         </div>
         <button className={buttonStyles.link} onClick={handleLogout}>

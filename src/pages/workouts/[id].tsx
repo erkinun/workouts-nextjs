@@ -59,7 +59,7 @@ export default function Workout() {
   return (
     <div className={styles.contentContainer}>
       <div>
-        <Link href={`/workouts/edit/${id}`}>
+        <Link href={`/workouts/edit/${id}`} legacyBehavior>
           <button className={buttonStyles.button}>
             <i className="fa-regular fa-pen-to-square"></i>
           </button>
